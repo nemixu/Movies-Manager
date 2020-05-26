@@ -71,3 +71,49 @@ The goal of this project is to X
 *
 *
 *
+
+## Design Choices:
+
+#### Fonts:
+
+*
+*
+*
+
+#### Icons:
+
+*
+*
+*
+
+#### Colours:
+
+*
+*
+*
+
+#### Styling:
+
+*
+*
+*
+
+#### Wireframes:
+
+*
+*
+*
+
+#### Background:
+
+*
+*
+*
+
+## Features:
+
+*
+*
+*
+*
+*
