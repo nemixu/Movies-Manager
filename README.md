@@ -117,3 +117,20 @@ The goal of this project is to X
 *
 *
 *
+
+## Technologies Used:
+
+### Languages:
+
+HTML
+CSS
+JavaScript ES6
+Python
+
+### Tools & Libraries:
+Jquery
+Git
+Bootstrap
+Font Awesome
+flask
+MongoDB
