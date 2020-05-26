@@ -134,3 +134,33 @@ Bootstrap
 Font Awesome
 flask
 MongoDB
+
+## Testing:
+
+This section will be updated with testing done on this project.
+
+#### Testing Planning:
+This section will have the plans for testing this application
+
+#### Defensive Testing:
+
+This section will be updated with testing done on this project.
+
+#### Testing Stories:
+*
+*
+*
+*
+
+### Testing Outcome:
+
+
+## Bugs:
+
+#### Bugs During Development:
+
+To be regularly updated:
+
+#### Known Bugs:
+
+Known bugs will be highlighted here.
