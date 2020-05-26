@@ -164,3 +164,39 @@ To be regularly updated:
 #### Known Bugs:
 
 Known bugs will be highlighted here.
+
+## Deployment:
+
+When deploying this application using GitHub Pages the following steps were made:
+
+* Opened up <strong>GitHub</strong> in the browser.
+* Signed in using username and password.
+* Selected my <strong>repositories</strong>.
+* Navigated to <strong>repository name</strong>.
+* In the top navigation clicked <strong>'settings'</strong>.
+* Scrolled down to the <strong>GitHub Pages</strong> area. 
+* Selected <strong>'Master Branch'</strong> from the <strong>'Source'</strong> dropdown menu.
+* Clicked to confirm my selection.
+* Application now live on GitHub Pages.
+
+#### Running the application Locally
+
+Cloning the repository from GitHub:
+
+* Navigate to <strong>link here</strong>.
+* Click the green <strong>'Clone or Download'</strong> button.
+* Copy the <strong>url</strong> in the dropdown box.
+* Using your favourite <strong>IDE</strong> open up your preferred <strong>terminal</strong>.
+* Navigate to your desired file location. 
+* Copy the following <strong>code</strong> and input it into your terminal to clone Repository.
+ ```git
+  git clone url link here
+   ```
+
+## Closing Notes:
+
+Any additional notes to go here
+
+## Credits: 
+
+Credits will go here
