@@ -27,3 +27,47 @@ This Project is for educational purposes only and is used to demonstrate the tec
 * Bugs
 * Deployment
 * Credits  
+
+## UX (User Experience)
+### Project Goals
+The goal of this project is to X
+
+
+#### User Goals:
+
+*
+*
+*
+*
+*
+
+#### User Stories:
+
+*
+*
+*
+*
+*
+
+#### Site Owner Goals:
+
+*
+*
+*
+
+
+## User Requirements and Expectations:
+##### Requirements:
+
+*
+*
+*
+*
+*
+##### Expectations:
+
+*
+*
+*
+*
+*
