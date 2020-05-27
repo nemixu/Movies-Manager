@@ -163,6 +163,8 @@ To be regularly updated:
 
 Had issues with login button on the login page, where the placeholder text on the button was off centrered on small screens, this was resolved with inline-size: min-content, this was tested through chrome dev tools and adjusting element styles to suit.
 
+Had issues with landing image on the home page, I set the background image to absolute, any new items added for e.g (new container, row, cols) would position offset due to the absolute, removing this then resorted in the natural flow of the html items.
+
 
 #### Known Bugs:
 
