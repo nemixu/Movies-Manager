@@ -14,7 +14,9 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = "movies_database"
 app.config["MONGO_URI"] = "mongodb+srv://root:winter22@myfirstcluster-0xnxg.mongodb.net/movies_database?retryWrites=true&w=majority"
 
+
 mongo = PyMongo(app)
+
 
 @app.route('/')
 @app.route('/home')
@@ -22,9 +24,19 @@ def test():
     return render_template("base.html")
 
 
+@app.route('/search-<search>')
+def search(search):
+    apikey = "3c0dea9f"
+    api = requests.get("http://www.omdbapi.com/?apikey={}&s={}".format(apikey, search))
+    data = api.json()
+
+    return data
+            
  
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port= os.environ.get('PORT'),
             debug=True)
+
+
