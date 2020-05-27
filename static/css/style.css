@@ -39,3 +39,91 @@ body {
 .navbar-light .navbar-toggler-icon {
     background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e);
 }
+
+/*--Login Page Styling --*/
+
+#login-header {
+    color: #83C5BE;
+    padding: 10px 0px;
+}
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    margin-top: 200px;
+}
+
+#formInputs {
+    
+    background: #f4f4f4;
+    padding: 35px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 50px;
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+#formFooter {
+    background-color: rgb(187, 187, 187);
+    padding: 25px;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0 0 10px 10px;
+}
+
+.input {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid #f6f6f6;
+}
+
+#login-button {
+    color: #ffffff;
+    background-color: #83C5BE;
+    width:30%;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    margin: 25px 0px;
+}
+
+#login-button:hover {
+    color: #ffffff;
+    background-color: rgba(131, 197, 191, 0.774);
+    width:30%;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    margin: 25px 0px;
+    animation: slowfade 2s ease-in;
+}
+
+#anchorHover {
+    color:#006D77;
+}
+
+#anchorHover:hover {
+    color:#ffffff;
+    text-decoration: none;
+}
