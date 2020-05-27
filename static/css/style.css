@@ -40,6 +40,39 @@ body {
     background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e);
 }
 
+
+/*-- Home Page Styling --*/
+
+#landing-image {
+    background: url("https://images.unsplash.com/photo-1568876694728-451bbf694b83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80") no-repeat center 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    filter: grayscale(20%);
+    height: 70vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#landing-text{
+    color:#ffffff;
+    text-shadow: 0px 3px 3px rgba(0, 0, 0, .2);
+}
+
+#home-main {
+    padding: 200px 40px;
+    
+}
+
 /*--Login Page Styling --*/
 
 #login-header {
