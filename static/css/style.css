@@ -41,6 +41,9 @@ body {
 }
 
 
+.main-content {
+    min-height: calc(100vh - 74px - 90px);
+}
 /*-- Home Page Styling --*/
 
 #landing-image {
@@ -49,7 +52,6 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
@@ -69,8 +71,12 @@ body {
 }
 
 #home-main {
-    padding: 200px 40px;
-    
+    padding: 20px 40px;
+
+}
+
+.movie-img {
+    width: inherit;
 }
 
 /*--Login Page Styling --*/

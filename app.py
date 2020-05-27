@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/home')
 def test():
-    return render_template("base.html")
+    return render_template("home.html")
 
 
 # @app.route('/search-<search>')
