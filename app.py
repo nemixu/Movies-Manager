@@ -24,15 +24,20 @@ def test():
     return render_template("base.html")
 
 
-@app.route('/search-<search>')
-def search(search):
-    apikey = "3c0dea9f"
-    api = requests.get("http://www.omdbapi.com/?apikey={}&s={}".format(apikey, search))
-    data = api.json()
+# @app.route('/search-<search>')
+# def search(search):
+#     apikey = "3c0dea9f"
+#     api = requests.get("http://www.omdbapi.com/?apikey={}&s={}".format(apikey, search))
+#     data = api.json()
 
-    return data
+#     return data
+#     print(data)
+
+# search(search)   
             
- 
+@app.route('/login')
+def login():
+    return render_template('login.html') 
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
