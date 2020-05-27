@@ -104,6 +104,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     margin: 25px 0px;
+    inline-size: min-content;
 }
 
 #login-button:hover {
@@ -117,6 +118,7 @@ body {
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     margin: 25px 0px;
     animation: slowfade 2s ease-in;
+    inline-size: min-content;
 }
 
 #anchorHover {

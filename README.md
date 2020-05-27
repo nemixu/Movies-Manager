@@ -161,6 +161,9 @@ This section will be updated with testing done on this project.
 
 To be regularly updated:
 
+Had issues with login button on the login page, where the placeholder text on the button was off centrered on small screens, this was resolved with inline-size: min-content, this was tested through chrome dev tools and adjusting element styles to suit.
+
+
 #### Known Bugs:
 
 Known bugs will be highlighted here.
