@@ -96,9 +96,9 @@ body {
     margin-top: 200px;
 }
 
-#formInputs {
+.formInputs {
     
-    background: #f4f4f4;
+    background: #e7e7e7;
     padding: 35px;
     width: 90%;
     max-width: 450px;
@@ -109,9 +109,10 @@ body {
     padding-top: 50px;
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.1);
     text-align: center;
+    
 }
 
-#formFooter {
+.formFooter {
     background-color: rgb(187, 187, 187);
     padding: 25px;
     text-align: center;
@@ -160,11 +161,40 @@ body {
     inline-size: min-content;
 }
 
-#anchorHover {
+.anchorHover {
     color:#006D77;
 }
 
-#anchorHover:hover {
+.anchorHover:hover {
     color:#ffffff;
     text-decoration: none;
+}
+
+/*-- Register Form --*/
+
+#register-button {
+    color: #ffffff;
+    background-color: #83C5BE;
+    width:30%;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    margin: 25px 0px;
+    inline-size: min-content;
+}
+
+#register-button:hover {
+    color: #ffffff;
+    background-color: rgba(131, 197, 191, 0.774);
+    width:30%;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    margin: 25px 0px;
+    animation: slowfade 2s ease-in;
+    inline-size: min-content;
 }
