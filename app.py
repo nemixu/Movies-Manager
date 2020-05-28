@@ -39,6 +39,11 @@ def test():
 def login():
     return render_template('login.html') 
 
+
+@app.route('/register')
+def register():
+    return render_template('register.html') 
+ 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port= os.environ.get('PORT'),
