@@ -67,12 +67,12 @@ The goal of this project is to create a web application that a user can interact
 
 ## Design Choices:
 
+The website will use light and neutral colours to have a warm an inviting theme for a user for a friendly vibe to ensure the user would return again. Also it should reflect to help the user digest the information on the site easily.
 
 #### Fonts:
 
-*
-*
-*
+* The font chosen for this project was Source Sans Pro as it was a sleek and clean font that made the information on the page pop and easy to read for the user.
+
 
 #### Icons:
 
