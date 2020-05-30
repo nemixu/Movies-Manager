@@ -30,49 +30,43 @@ This Project is for educational purposes only and is used to demonstrate the tec
 
 ## UX (User Experience)
 ### Project Goals
-The goal of this project is to X
-
+The goal of this project is to create a web application that a user can interact with and search for their favorite movies. The users who access the website will be able to create a favorites list from movies they search.
 
 #### User Goals:
 
-*
-*
-*
-*
-*
+* To search movies I like and add ratings
+* Create an account where I can build up a favorites list to keep track of movies I like
+* Visit a visually eppealing website
+* Be able to consume information on my mobile device, desktop or tablet without any issues.
 
 #### User Stories:
 
-*
-*
-*
-*
-*
-
-#### Site Owner Goals:
-
-*
-*
-*
+* As a user I wish to create an account on the site
+* As a user I wish to be able to search movies by name
+* As a user I wish to be able to add a rating to a movie searched
+* As a user I wish to add movies to a favorites list
+* As a user I wish to be able to remove items from the above list whenever I want
+* As a user I wish to be able to use this site on any device
 
 
 ## User Requirements and Expectations:
 ##### Requirements:
 
-*
-*
-*
-*
-*
+* Interact with a visually appealing website
+* Navigate the website with ease with fast loading times
+* Find the movie I am looking with it showing a cover image of the movie
+* Information to be easy to digest for the user
+
 ##### Expectations:
 
-*
-*
-*
-*
-*
+* The site protects the users information
+* The user can interact with the elements on the page 
+* The web application is usable on mutliple devices
+* The website loads with sufficient speed
+* The users are able to easily access their favorites
 
 ## Design Choices:
+
 
 #### Fonts:
 
