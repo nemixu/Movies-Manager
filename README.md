@@ -71,14 +71,13 @@ The website will use light and neutral colours to have a warm an inviting theme 
 
 #### Fonts:
 
-* The font chosen for this project was Source Sans Pro as it was a sleek and clean font that made the information on the page pop and easy to read for the user.
+The font chosen for this project was Source Sans Pro as it was a sleek and clean font that made the information on the page pop and easy to read for the user.
 
 
 #### Icons:
 
-*
-*
-*
+Icons used for this website were sourced from font-awesome as it was easy to locate and preview the icons needed for best user experience for those interacting with the site.
+
 
 #### Colours:
 
@@ -94,9 +93,9 @@ The website will use light and neutral colours to have a warm an inviting theme 
 
 #### Wireframes:
 
-*
-*
-*
+Wireframes for this projected were created using Balsamiq mockups.
+Each wireframe was created using mobile first and each sketchup was done prior to the building of the site to ensure fast workflow.
+Having done this provided me with drawings to work with whilst in the production phase and ensured I followed the exact steps and in return cut my production time in half.
 
 #### Background:
 
