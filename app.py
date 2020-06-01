@@ -20,7 +20,7 @@ mongo = PyMongo(app)
 
 @app.route('/')
 @app.route('/home')
-def test():
+def home():
     return render_template("home.html")
 
 
