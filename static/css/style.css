@@ -216,3 +216,39 @@ body {
     animation: slowfade 2s ease-in;
     inline-size: min-content;
 }
+
+/*-- Footer Styling --*/
+
+.footer{
+    background-color: #f4f4f4;
+    padding: 20px 0;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, .2);
+    display: block;
+}
+
+.footer-items ul {
+    padding: 0;
+}
+
+.github {
+    font-size: 2.3rem;
+    color: #0d0d0d;
+    padding-top: 10px;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+  }
+
+  .github:hover {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    color: #83C5BE;
+  }
+
