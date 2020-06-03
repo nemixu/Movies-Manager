@@ -1,6 +1,7 @@
 import os 
 from os import path
 import time
+import requests
 from flask import Flask, render_template, redirect, request, url_for, session, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -24,16 +25,19 @@ def home():
     return render_template("home.html")
 
 
-# @app.route('/search-<search>')
-# def search(search):
-#     apikey = "3c0dea9f"
-#     api = requests.get("http://www.omdbapi.com/?apikey={}&s={}".format(apikey, search))
-#     data = api.json()
+@app.route('/search', methods=['GET'])
+def search():
+    return render_template('search.html')
 
-#     return data
-#     print(data)
-
-# search(search)   
+@app.route('/search-results', methods=['POST'])
+def searchResults():
+    searchTerm = request.form['search-term']
+    apikey = "3c0dea9f"
+    api = requests.get("http://www.omdbapi.com/?apikey={}&s={}".format(apikey, searchTerm))
+    data = api.json()
+    print(data)
+    return 'POSTED' 
+            
             
 @app.route('/login', methods=['GET','POST'])
 def login():
