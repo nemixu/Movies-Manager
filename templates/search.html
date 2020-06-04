@@ -1,21 +1,40 @@
 {% extends 'base.html' %} {% block content %}
-​
+​<div class="container">
+  <div class="row">
+    <div class="col">
 <form method="post" action="search" id="search-form">
     <div class="form-group">
-      <label for="exampleInputPassword1">Search</label>
+      <label for="exampleInputPassword1">Search a movie title</label>
       <input type="text" class="form-control" id="search-term" name="search-term">
     </div>
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary" id="search-button">Search</button>
 </form>
-​
+</div>
+</div>
+​</div>
 <div id="results">
-  {% for movie in returnResults %}
-    <div id="{{ movie[0] }}">
-      <p>{{ movie[0] }}</p>
-      <p>{{ movie[1] }}</p>
-      <img src="{{ movie[2] }}">
-    </div>
-  {% endfor %}
+    <div class="container">
+      <div class="row">
+        {% for movie in returnResults %}
+          <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
+              <img src="{{ movie[2] }}" class="rounded float-left movie-img" alt="Movie Image">
+              <h3 class="movie-title">
+                  {{ movie[0] }}
+              </h3>
+              <h4 class="movie-year">
+                {{ movie[1] }}
+              </h4>
+              <h4 class="movie-director">
+                  David Ayer
+              </h4>
+              <p class="movie-description">
+                  Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work with an Orc to find a weapon everyone is prepared to kill for. 
+              </p>
+          </div>
+          {% endfor %} 
+      </div> 
+  </div>
 </div>
 ​
 {% endblock %}
+

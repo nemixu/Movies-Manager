@@ -27,6 +27,7 @@ def home():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
+    
     if request.method == 'POST':
         searchTerm = request.form['search-term']
         apikey = "3c0dea9f"
