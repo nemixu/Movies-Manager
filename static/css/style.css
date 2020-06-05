@@ -101,6 +101,10 @@ body {
     font-size: 1rem;
 }
 
+.movie-title {
+    font-size: 1.4rem;
+}
+
 .movie-director{
     font-size: 1rem;
     font-style: italic;
@@ -290,7 +294,9 @@ body {
 /*-- Search page--*/
 
 #search-form {
-    padding-top: 200px;
+    padding-top: 100px;
+    padding-bottom: 30px;
+
 }
 
 #search-button{
@@ -305,6 +311,19 @@ body {
     inline-size: min-content;
 }
 
+#search-button:hover{
+    color: #ffffff;
+    background-color: rgba(131, 197, 191, 0.774);
+    width:30%;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    animation: slowfade 2s ease-in;
+    inline-size: min-content;
+}
+
 #add-favorites {
     color: #ffffff;
     background-color: #83C5BE;
@@ -315,6 +334,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     inline-size: min-content;
+    margin-bottom: 100px;
 }
 
 #add-favorites:hover{

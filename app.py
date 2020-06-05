@@ -38,14 +38,14 @@ def search():
         for movies in data['Search']:
             title = movies['Title']
             year = movies['Year']
+            imdb = movies['imdbID']
             poster = movies['Poster']
-            movieDetails = [title, year, poster]
+            movieDetails = [title, year, imdb, poster]
             returnResults.append(movieDetails)
         print(returnResults)
         return render_template('search.html', returnResults=returnResults)
     else:
         return render_template('search.html')
-            
             
 @app.route('/login', methods=['GET','POST'])
 def login():
