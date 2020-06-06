@@ -349,3 +349,7 @@ body {
     animation: slowfade 2s ease-in;
     inline-size: min-content;
 }
+
+.hidden-text {
+    display:none;
+}
