@@ -27,7 +27,6 @@ def home():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    
     if request.method == 'POST':
         searchTerm = request.form['search-term']
         apikey = "3c0dea9f"
@@ -46,7 +45,19 @@ def search():
         return render_template('search.html', returnResults=returnResults)
     else:
         return render_template('search.html')
-            
+
+@app.route('/add_favorite', methods=['POST'])
+def add_favorite():
+    favorites=mongo.db.favorites
+    favorites.insert_one(request.form.to_dict())
+    return redirect(url_for('search'))
+    
+        
+        
+        
+        
+        
+        
 @app.route('/login', methods=['GET','POST'])
 def login():
     return render_template('login.html') 
