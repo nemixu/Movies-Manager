@@ -158,6 +158,7 @@ Had issues with login button on the login page, where the placeholder text on th
 
 Had issues with landing image on the home page, I set the background image to absolute, any new items added for e.g (new container, row, cols) would position offset due to the absolute, removing this then resorted in the natural flow of the html items.
 
+Issues with the search data that was displayhed from div's and h3's it would not post to DB correctly, added hidden text areas and it sent correctly, next issue was because each div was part of a for loop it would only post the first div field input even if we clicked the last input.
 
 #### Known Bugs:
 
