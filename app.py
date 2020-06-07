@@ -46,18 +46,40 @@ def search():
     else:
         return render_template('search.html')
 
+
 @app.route('/add_favorite', methods=['POST'])
 def add_favorite():
     favorites=mongo.db.favorites
     favorites.insert_one(request.form.to_dict())
     return redirect(url_for('search'))
+   
+@app.route('/favorites')
+def favorites():
     
-        
-        
-        
-        
-        
-        
+    return render_template('favorites.html', 
+                           favorites=mongo.db.favorites.find())
+
+
+
+
+
+
+
+
+
+# @app.route('/remove_favorite/', methods=['POST'])
+# def remove_favorite():
+#     mongo.db.favorites.remove({'_id': ObjectId(task_id)})
+#     return redirect(url_for('favorites')  
+               
+
+
+
+
+
+
+
+
 @app.route('/login', methods=['GET','POST'])
 def login():
     return render_template('login.html') 
