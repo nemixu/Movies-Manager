@@ -55,10 +55,10 @@ def add_favorite():
    
 @app.route('/favorites')
 def favorites():
-    
+
     return render_template('favorites.html', 
                            favorites=mongo.db.favorites.find())
-
+    
 
 
 
