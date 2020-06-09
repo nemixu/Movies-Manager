@@ -3,11 +3,10 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>Your Favorites</h1>
+            <h1>Your Favourites</h1>
         </div>
         {% for movie in favorites %}
           <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
-            <form action="{{ url_for('add_favorite') }}" method="POST">
               <img src="{{ movie.poster }}" class="rounded float-left movie-img" alt="Movie Image">
               <textarea name="title" id="title" type="hidden" class="hidden-text">{{ movie.title }}</textarea>
               <textarea name="year" id="year" type="hidden" class="hidden-text">{{ movie.year }}</textarea>
@@ -20,11 +19,11 @@
               <h4 class="movie-year">
                 {{ movie.year }}
               </h4>
-              <input type="submit" id="add-favorites" class="input" value="Add to Favorites">
-            </form>
+              <a href="/delete_favorites/{{movie._id}}" class="btn btn-dark">Remove</a>
           </div>
           {% endfor %} 
     </div>
 </div>
 
+  
 {% endblock %}
