@@ -52,26 +52,19 @@ def add_favorite():
     favorites=mongo.db.favorites
     favorites.insert_one(request.form.to_dict())
     return redirect(url_for('search'))
-   
-@app.route('/favorites')
+                    
+@app.route('/favourites')
 def favorites():
-
-    return render_template('favorites.html', 
-                           favorites=mongo.db.favorites.find())
-    
+    return render_template('favourites.html', 
+                           favorites=mongo.db.favorites.find())    
 
 
+@app.route('/delete_favorites/<favorites_id>')
+def delete_favorites(favorites_id):
+    favorites = mongo.db.favorites.delete_one({'_id': ObjectId(favorites_id)})
+    return redirect(url_for('favorites'))    
 
 
-
-
-
-
-# @app.route('/remove_favorite/', methods=['POST'])
-# def remove_favorite():
-#     mongo.db.favorites.remove({'_id': ObjectId(task_id)})
-#     return redirect(url_for('favorites')  
-               
 
 
 
