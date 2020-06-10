@@ -18,32 +18,70 @@ app.config["MONGO_URI"] = "mongodb+srv://root:winter22@myfirstcluster-0xnxg.mong
 
 mongo = PyMongo(app)
 
+# Collections
+
+users_collection = mongo.db.users
+user_favorites = mongo.db.favorites
+
 
 @app.route('/')
 @app.route('/home')
 def home():
     return render_template("home.html")
 
+# Register an account
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    
+    # Check if user is not logged in already
+    if 'user' in session:
+        flash('You are already signed in!')
+        return redirect(url_for('home'))
+    
+    if request.method == 'POST':
+        form = request.form.to_dict()
+        if form['register_password'] == form['register_password1']:
+            user = users_collection.find_one({"username": form['username']})
+            if user:
+                flash(f"{form['username']} already exists!")
+                return redirect(url_for('register'))
+            else:
+                hash_password = generate_password_hash(form['register_password'])
+                users_collection.insert_one(
+                    {
+                        'username': form['username'],
+                        'email' : form['email'],
+                        'password': hash_password
+                    }
+                )
+                    
+    return render_template('register.html') 
+
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    if request.method == 'POST':
-        searchTerm = request.form['search-term']
-        apikey = "3c0dea9f"
-        api = requests.get("http://www.omdbapi.com/?apikey={}&s={}".format(apikey, searchTerm))
-        data = api.json()
-        print(data)
-        returnResults = list()
-        for movies in data['Search']:
-            title = movies['Title']
-            year = movies['Year']
-            imdb = movies['imdbID']
-            poster = movies['Poster']
-            movieDetails = [title, year, imdb, poster]
-            returnResults.append(movieDetails)
-        print(returnResults)
-        return render_template('search.html', returnResults=returnResults)
-    else:
+    try:
+        if request.method == 'POST':
+            searchTerm = request.form['search-term']
+            apikey = "3c0dea9f"
+            api = requests.get("http://www.omdbapi.com/?apikey={}&s={}".format(apikey, searchTerm))
+            data = api.json()
+            print(data)
+            returnResults = list()    
+            for movies in data['Search']:
+                title = movies['Title']
+                year = movies['Year']
+                imdb = movies['imdbID']
+                poster = movies['Poster']
+                movieDetails = [title, year, imdb, poster]
+                returnResults.append(movieDetails)
+            print(returnResults)
+            return render_template('search.html', returnResults=returnResults)
+        else:
+            return render_template('search.html')
+    except KeyError:
+        # will add code here to handle empty searches or searches that are not specific 
         return render_template('search.html')
 
 
@@ -61,30 +99,10 @@ def favorites():
 
 @app.route('/delete_favorites/<favorites_id>')
 def delete_favorites(favorites_id):
-    favorites = mongo.db.favorites.delete_one({'_id': ObjectId(favorites_id)})
+    mongo.db.favorites.delete_one({'_id': ObjectId(favorites_id)})
     return redirect(url_for('favorites'))    
 
 
-
-
-
-
-
-
-
-
-@app.route('/login', methods=['GET','POST'])
-def login():
-    return render_template('login.html') 
-
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    return render_template('register.html') 
- 
- 
- 
-  
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port= os.environ.get('PORT'),
