@@ -42,7 +42,7 @@ def register():
     if request.method == 'POST':
         form = request.form.to_dict()
         # checking passwords match
-        if form['register_password'] == form['register_password1']:
+        if form['register_password'] == form['repeated_password']:
             user = users_collection.find_one({"username": form['username']})
 
             if user:
@@ -78,8 +78,8 @@ def profile(user):
 	# Check if user is logged in
 	if 'user' in session:
 		# If so get the user and pass him to template for now
-		users_collection = users_collection.find_one({"username": user})
-		return render_template('profile.html', user=users_collection)
+		find_user = users_collection.find_one({"username": user})
+		return render_template('profile.html', user=find_user)
 	else:
 		flash("You must be logged in!")
 		return redirect(url_for('home'))
