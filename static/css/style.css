@@ -353,3 +353,19 @@ body {
 .hidden-text {
     display:none;
 }
+
+
+#alerts {
+    position: absolute;
+    display: none;
+    min-height: 50px;
+    top: 95%;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #a32a2a;
+}
+
+#alerts p {
+    margin: 10px 0px;
+}
