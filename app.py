@@ -14,6 +14,7 @@ if path.exists("env.py"):
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = "movies_database"
 app.config["MONGO_URI"] = "mongodb+srv://root:winter22@myfirstcluster-0xnxg.mongodb.net/movies_database?retryWrites=true&w=majority"
+app.secret_key = "super secret key"
 
 
 mongo = PyMongo(app)
@@ -38,15 +39,17 @@ def register():
     if 'user' in session:
         flash('You are already signed in!')
         return redirect(url_for('home'))
-    
     if request.method == 'POST':
         form = request.form.to_dict()
+        # checking passwords match
         if form['register_password'] == form['register_password1']:
             user = users_collection.find_one({"username": form['username']})
+
             if user:
                 flash(f"{form['username']} already exists!")
                 return redirect(url_for('register'))
             else:
+                # hashing password 
                 hash_password = generate_password_hash(form['register_password'])
                 users_collection.insert_one(
                     {
@@ -55,8 +58,36 @@ def register():
                         'password': hash_password
                     }
                 )
+                # Checking to see if users details have been saved
+                registered_user = users_collection.find_one({"username": form['username']})
+                if registered_user:
+                    session['user'] = registered_user['username']
+                    return redirect(url_for('profile', user=registered_user['username']))
+                else:
+                    flash("There was an issue registering your account")
+                    return redirect(url_for('register'))
+                
+        else:
+            flash('Sorry your passwords do not match')
+            return redirect(url_for('register'))
                     
     return render_template('register.html') 
+
+@app.route('/profile/<user>')
+def profile(user): 
+	# Check if user is logged in
+	if 'user' in session:
+		# If so get the user and pass him to template for now
+		users_collection = users_collection.find_one({"username": user})
+		return render_template('profile.html', user=users_collection)
+	else:
+		flash("You must be logged in!")
+		return redirect(url_for('home'))
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    return render_template('login.html')
+
 
 
 @app.route('/search', methods=['GET', 'POST'])
