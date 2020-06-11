@@ -160,6 +160,10 @@ Had issues with landing image on the home page, I set the background image to ab
 
 Issues with the search data that was displayhed from div's and h3's it would not post to DB correctly, added hidden text areas and it sent correctly, next issue was because each div was part of a for loop it would only post the first div field input even if we clicked the last input.
 
+For loop on favourites page where I was using the incorrect variable name and it was not pulling the correct information.
+
+Had issue with the profile variable, I had called a global variable and re-used the global name on a local variable and it was giving errors, changing the var name resolved this.
+
 #### Known Bugs:
 
 Known bugs will be highlighted here.
