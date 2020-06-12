@@ -44,7 +44,6 @@ def register():
         # checking passwords match
         if form['register_password'] == form['repeated_password']:
             user = users_collection.find_one({"username": form['username']})
-
             if user:
                 flash(f"{form['username']} already exists!")
                 return redirect(url_for('register'))
@@ -62,15 +61,14 @@ def register():
                 registered_user = users_collection.find_one({"username": form['username']})
                 if registered_user:
                     session['user'] = registered_user['username']
+                    flash("Your account has been created!")
                     return redirect(url_for('profile', user=registered_user['username']))
                 else:
                     flash("There was an issue registering your account")
                     return redirect(url_for('register'))
-                
         else:
             flash('Sorry your passwords do not match')
             return redirect(url_for('register'))
-                    
     return render_template('register.html') 
 
 @app.route('/profile/<user>')
@@ -79,14 +77,21 @@ def profile(user):
 	if 'user' in session:
 		# If so get the user and pass him to template for now
 		find_user = users_collection.find_one({"username": user})
-		return render_template('profile.html', user=find_user)
+		return render_template('profile.html', user=find_user, favorites_1=mongo.db.favorites.find())
 	else:
 		flash("You must be logged in!")
 		return redirect(url_for('home'))
 
-@app.route('/login', methods=['GET','POST'])
+
+@app.route('/login', methods=['GET'])
 def login():
-    return render_template('login.html')
+    if 'user' in session:
+        find_user = users_collection.find_one({"username": session['user']})
+        if find_user:
+            flash('You are already logged in!')
+            return redirect(url_for('profile', user=find_user['username']))
+    else:
+        return render_template('login.html')
 
 
 
