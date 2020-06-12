@@ -115,7 +115,15 @@ def user_auth():
 			return redirect(url_for('login'))
 	else:
 		flash("You must be registered!")
-		return redirect(url_for('register'))    
+		return redirect(url_for('register')) 
+
+
+@app.route('/logout')
+def logout():
+    # Clearing session to log user out
+    session.clear()
+    flash('You have been logged out!')
+    return redirect(url_for('home'))   
 
 
 
