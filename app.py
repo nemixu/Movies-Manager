@@ -92,6 +92,30 @@ def login():
             return redirect(url_for('profile', user=find_user['username']))
     else:
         return render_template('login.html')
+    
+@app.route('/user_auth', methods=['POST'])
+def user_auth():
+	form = request.form.to_dict()
+	find_user = users_collection.find_one({"username": form['username']})
+	# Check for user in database
+	if find_user:
+		# If passwords match (hashed / real password)
+		if check_password_hash(find_user['password'], form['user_password']):
+			# Log user in (add to session)
+			session['user'] = form['username']
+			# If the user is admin redirect him to admin area
+			if session['user'] == "admin":
+				return redirect(url_for('admin'))
+			else:
+				flash("You were logged in!")
+				return redirect(url_for('profile', user=find_user['username']))
+
+		else:
+			flash("Wrong password or user name!")
+			return redirect(url_for('login'))
+	else:
+		flash("You must be registered!")
+		return redirect(url_for('register'))    
 
 
 
