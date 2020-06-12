@@ -34,7 +34,6 @@ def home():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    
     # Check if user is not logged in already
     if 'user' in session:
         flash('You are already signed in!')
@@ -71,6 +70,7 @@ def register():
             return redirect(url_for('register'))
     return render_template('register.html') 
 
+# User profile
 @app.route('/profile/<user>')
 def profile(user): 
 	# Check if user is logged in
@@ -82,7 +82,7 @@ def profile(user):
 		flash("You must be logged in!")
 		return redirect(url_for('home'))
 
-
+# Login route
 @app.route('/login', methods=['GET'])
 def login():
     if 'user' in session:
@@ -93,6 +93,7 @@ def login():
     else:
         return render_template('login.html')
     
+# Authenticate User form request   
 @app.route('/user_auth', methods=['POST'])
 def user_auth():
 	form = request.form.to_dict()
@@ -109,7 +110,6 @@ def user_auth():
 			else:
 				flash("You were logged in!")
 				return redirect(url_for('profile', user=find_user['username']))
-
 		else:
 			flash("Wrong password or user name!")
 			return redirect(url_for('login'))
@@ -117,16 +117,15 @@ def user_auth():
 		flash("You must be registered!")
 		return redirect(url_for('register')) 
 
-
+# Logout results in clearing the session and logging user out
 @app.route('/logout')
 def logout():
-    # Clearing session to log user out
     session.clear()
     flash('You have been logged out!')
     return redirect(url_for('home'))   
 
 
-
+# Search page route, handling api request 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     try:
@@ -152,12 +151,20 @@ def search():
         # will add code here to handle empty searches or searches that are not specific 
         return render_template('search.html')
 
-
+# Adding a favourite to db
 @app.route('/add_favorite', methods=['POST'])
 def add_favorite():
-    favorites=mongo.db.favorites
-    favorites.insert_one(request.form.to_dict())
-    return redirect(url_for('search'))
+    if 'user' in session:
+            favorites=mongo.db.favorites   
+            if favorites:
+                favorites.insert_one(request.form.to_dict())
+                flash('Movie added to your favourites!')
+            return redirect(url_for('search'))
+    else:
+        flash('You must be logged in to add a favourite')
+        return render_template('login.html')
+    
+    
                     
 @app.route('/favourites')
 def favorites():
@@ -167,7 +174,11 @@ def favorites():
 
 @app.route('/delete_favorites/<favorites_id>')
 def delete_favorites(favorites_id):
-    mongo.db.favorites.delete_one({'_id': ObjectId(favorites_id)})
+    if 'user' in session:
+            mongo.db.favorites.delete_one({'_id': ObjectId(favorites_id)})
+            flash('Movie removed from your list')  
+    else:
+        flash('You must be logged in to remove this item')        
     return redirect(url_for('favorites'))    
 
 
