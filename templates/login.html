@@ -3,9 +3,9 @@
 <div class="login-wrapper">
     <div class="formInputs">
             <h1 id="login-header">Sign In Here</h1>
-<form>
-    <input type="text" id="login" class="input" name="login" placeholder="Login">
-    <input type="password" id="password" class="input"  name="login" placeholder="Password">
+<form method="POST" action="/user_auth">
+    <input type="text" id="login" class="input" name="username" placeholder="Login" required>
+    <input type="password" id="password" class="input"  name="user_password" placeholder="Password" required>
     <input type="submit" id="login-button" class="input" value="Login">
  </form>
 <div class="formFooter">
