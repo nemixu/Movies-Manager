@@ -162,7 +162,6 @@ def search():
 @app.route('/add_favorite', methods=['POST'])
 def add_favorite():
     if 'user' in session:
-        print(session['user'])
         mongo.db.users.update_one({'_id': ObjectId(session['user'])}, { '$push': {'favourites': request.form.to_dict()}})
         flash('Movie added to your favourites!')
         return redirect(url_for('search'))
