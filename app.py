@@ -1,4 +1,4 @@
-import os 
+import os
 from os import path
 import time
 import requests
@@ -32,6 +32,7 @@ def home():
 
 # Register an account
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # Check if user is not logged in already
@@ -47,17 +48,19 @@ def register():
                 flash(f"{form['username']} already exists!")
                 return redirect(url_for('register'))
             else:
-                # hashing password 
-                hash_password = generate_password_hash(form['register_password'])
+                # hashing password
+                hash_password = generate_password_hash(
+                    form['register_password'])
                 users_collection.insert_one(
                     {
                         'username': form['username'],
-                        'email' : form['email'],
+                        'email': form['email'],
                         'password': hash_password
                     }
                 )
                 # Checking to see if users details have been saved
-                registered_user = users_collection.find_one({"username": form['username']})
+                registered_user = users_collection.find_one(
+                    {"username": form['username']})
                 if registered_user:
                     session['user'] = registered_user['username']
                     flash("Your account has been created!")
@@ -68,21 +71,25 @@ def register():
         else:
             flash('Sorry your passwords do not match')
             return redirect(url_for('register'))
-    return render_template('register.html') 
+    return render_template('register.html')
 
 # User profile
+
+
 @app.route('/profile/<user>')
-def profile(user): 
-	# Check if user is logged in
-	if 'user' in session:
-		# If so get the user and pass him to template for now
-		find_user = users_collection.find_one({"username": user})
-		return render_template('profile.html', user=find_user, favorites_1=mongo.db.favorites.find())
-	else:
-		flash("You must be logged in!")
-		return redirect(url_for('home'))
+def profile(user):
+    # Check if user is logged in
+    if 'user' in session:
+        # If so get the user and pass him to template for now
+        find_user = users_collection.find_one({"username": user})
+        return render_template('profile.html', user=find_user, favorites_1=mongo.db.favorites.find())
+    else:
+        flash("You must be logged in!")
+        return redirect(url_for('home'))
 
 # Login route
+
+
 @app.route('/login', methods=['GET'])
 def login():
     if 'user' in session:
@@ -92,99 +99,96 @@ def login():
             return redirect(url_for('profile', user=find_user['username']))
     else:
         return render_template('login.html')
-    
-# Authenticate User form request   
+
+# Authenticate User form request
+
+
 @app.route('/user_auth', methods=['POST'])
 def user_auth():
-	form = request.form.to_dict()
-	find_user = users_collection.find_one({"username": form['username']})
-	# Check for user in database
-	if find_user:
-		# If passwords match (hashed / real password)
-		if check_password_hash(find_user['password'], form['user_password']):
-			# Log user in (add to session)
-			session['user'] = form['username']
-			# If the user is admin redirect him to admin area
-			if session['user'] == "admin":
-				return redirect(url_for('admin'))
-			else:
-				flash("You were logged in!")
-				return redirect(url_for('profile', user=find_user['username']))
-		else:
-			flash("Wrong password or user name!")
-			return redirect(url_for('login'))
-	else:
-		flash("You must be registered!")
-		return redirect(url_for('register')) 
+    form = request.form.to_dict()
+    find_user = users_collection.find_one({"username": form['username']})
+    # Check for user in database
+    if find_user:
+        # If passwords match (hashed / real password)
+        if check_password_hash(find_user['password'], form['user_password']):
+            # Log user in (add to session)
+            session['user'] = str(find_user['_id'])
+            # If the user is admin redirect him to admin area
+            if session['user'] == "admin":
+                return redirect(url_for('admin'))
+            else:
+                flash("You were logged in!")
+                return redirect(url_for('profile', user=find_user['username']))
+        else:
+            flash("Wrong password or username!")
+            return redirect(url_for('login'))
+    else:
+        flash("You must be registered!")
+        return redirect(url_for('register'))
 
 # Logout results in clearing the session and logging user out
+
+
 @app.route('/logout')
 def logout():
     session.clear()
     flash('You have been logged out!')
-    return redirect(url_for('home'))   
+    return redirect(url_for('home'))
 
 
-# Search page route, handling api request 
+# Search page route, handling api request
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     try:
         if request.method == 'POST':
             searchTerm = request.form['search-term']
             apikey = "3c0dea9f"
-            api = requests.get("http://www.omdbapi.com/?apikey={}&s={}".format(apikey, searchTerm))
+            api = requests.get(
+                "http://www.omdbapi.com/?apikey={}&s={}".format(apikey, searchTerm))
             data = api.json()
             print(data)
-            returnResults = list()    
+            returnResults = list()
             for movies in data['Search']:
-                title = movies['Title']
-                year = movies['Year']
-                imdb = movies['imdbID']
-                poster = movies['Poster']
-                movieDetails = [title, year, imdb, poster]
-                returnResults.append(movieDetails)
+                returnResults.append([movies['Title'], movies['Year'], movies['imdbID'], movies['Poster']])
             print(returnResults)
             return render_template('search.html', returnResults=returnResults)
         else:
             return render_template('search.html')
     except KeyError:
-        # will add code here to handle empty searches or searches that are not specific 
+        # will add code here to handle empty searches or searches that are not specific
         return render_template('search.html')
 
 # Adding a favourite to db
 @app.route('/add_favorite', methods=['POST'])
 def add_favorite():
     if 'user' in session:
-            favorites=mongo.db.favorites   
-            if favorites:
-                favorites.insert_one(request.form.to_dict())
-                flash('Movie added to your favourites!')
-            return redirect(url_for('search'))
+        print(session['user'])
+        mongo.db.users.update_one({'_id': ObjectId(session['user'])}, { '$push': {'favourites': request.form.to_dict()}})
+        flash('Movie added to your favourites!')
+        return redirect(url_for('search'))
     else:
         flash('You must be logged in to add a favourite')
         return render_template('login.html')
-    
-    
-                    
+
+
 @app.route('/favourites')
 def favorites():
-    return render_template('favourites.html', 
-                           favorites=mongo.db.favorites.find())    
+    return render_template('favourites.html',
+                           favorites=mongo.db.favorites.find())
 
 
 @app.route('/delete_favorites/<favorites_id>')
 def delete_favorites(favorites_id):
     if 'user' in session:
-            mongo.db.favorites.delete_one({'_id': ObjectId(favorites_id)})
-            flash('Movie removed from your list')  
+        mongo.db.favorites.delete_one({'_id': ObjectId(favorites_id)})
+        flash('Movie removed from your list')
     else:
-        flash('You must be logged in to remove this item')        
-    return redirect(url_for('favorites'))    
+        flash('You must be logged in to remove this item')
+    return redirect(url_for('favorites'))
 
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
-            port= os.environ.get('PORT'),
+            port=os.environ.get('PORT'),
             debug=True)
-
 
