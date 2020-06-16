@@ -85,7 +85,7 @@ Icons used for this website were sourced from font-awesome as it was easy to loc
 *
 *
 
-#### Styling:
+#### Styling: 
 
 *
 *
@@ -96,6 +96,13 @@ Icons used for this website were sourced from font-awesome as it was easy to loc
 Wireframes for this projected were created using Balsamiq mockups.
 Each wireframe was created using mobile first and each sketchup was done prior to the building of the site to ensure fast workflow.
 Having done this provided me with drawings to work with whilst in the production phase and ensured I followed the exact steps and in return cut my production time in half.
+
+#### Database planning:
+
+As this was the first time working with databases and schemas I was unsure how to handle or tackle a project like this. My original plan for the database was to have a collection of Users: inside this document I would have username , email, password(hashed), and a unique id. After this I had a Favourites collection:  that had a list of favouirtes added by the user, which held title, year, poster, and imdbid code. After using this schema I found it to be problematic that If I added a user they would see all favouirtes as I did not declare a relationship between them.
+I made a change to the schema and then added an array inside of the Users document that would show the users favourites only which was fine and worked well for the purpose.
+An issue I then had was the relationship was still not valid as it was possible to duplicate the same movie favourite over and over instead of just calling the data already if it was once added to the database.
+
 
 #### Background:
 
@@ -163,6 +170,10 @@ Issues with the search data that was displayhed from div's and h3's it would not
 For loop on favourites page where I was using the incorrect variable name and it was not pulling the correct information.
 
 Had issue with the profile variable, I had called a global variable and re-used the global name on a local variable and it was giving errors, changing the var name resolved this.
+
+During the development of this application, I originally wanted to have my database scheme as simple as possible, I begun planning my database to have my favourites for a user nested in an array inside the users database information. After planning my application around this, during the development stage It became clear that this was not the correct way to do this and it also ended up that there would be mutliple duplications of movies in the database.
+
+Tor resolve this I changed how the add to favourites worked and the favourites section, upon changing the queries i ran into errors like this, "<pymongo.cursor.Cursor object at 0x04694700>" and this was because I was passing into the database a string but was requesting and object id. when the object id was passed correctly into the favourites and called correctly the issue was resolved.
 
 #### Known Bugs:
 
