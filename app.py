@@ -147,11 +147,11 @@ def search():
                 "http://www.omdbapi.com/?apikey={}&s={}".format(apikey, searchTerm))
             data = api.json()
             print(data)
-            returnResults = list()
+            movieResults = list()
             for movies in data['Search']:
-                returnResults.append([movies['Title'], movies['Year'], movies['imdbID'], movies['Poster']])
-            print(returnResults)
-            return render_template('search.html', returnResults=returnResults)
+                movieResults.append([movies['Title'], movies['Year'], movies['imdbID'], movies['Poster']])
+            print(movieResults)
+            return render_template('search.html', movieResults=movieResults)
         else:
             return render_template('search.html')
     except KeyError:
