@@ -19,11 +19,10 @@
           <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
             <form action="{{ url_for('add_favorite') }}" method="POST">
               <img src="{{ movie[3] }}" class="rounded float-left movie-img" alt="Movie Image">
-              <input name="id" type="hidden" class="hidden-text"value="{{movie[0]}}"/>
-              <textarea name="title" id="title" type="hidden" class="hidden-text">{{ movie[1] }}</textarea>
-              <textarea name="year" id="year" type="hidden" class="hidden-text">{{ movie[2] }}</textarea>
-              <textarea name="imdbid" id="imdbid" type="hidden" class="hidden-text">{{ movie[3] }}</textarea>
-              <textarea name="poster" id="poster" type="hidden" class="hidden-text">{{ movie[4] }}</textarea>
+              <textarea name="title" id="title" type="hidden" class="hidden-text">{{ movie[0] }}</textarea>
+              <textarea name="year" id="year" type="hidden" class="hidden-text">{{ movie[1] }}</textarea>
+              <textarea name="imdbid" id="imdbid" type="hidden" class="hidden-text">{{ movie[2] }}</textarea>
+              <textarea name="poster" id="poster" type="hidden" class="hidden-text">{{ movie[3] }}</textarea>
               <h3 class="movie-title">
                 <a target="_blank" rel="noopener" href="https://www.imdb.com/title/{{ movie [2]}}/"><i class="fa fa-imdb"></i></a>
                   {{ movie[0] }} 
