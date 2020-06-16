@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 
 # Collections
 users_collection = mongo.db.users
-user_favourites = mongo.db.favourites
+favourites_collection = mongo.db.favourites
 
 
 @app.route('/')
@@ -52,14 +52,15 @@ def register():
                     {
                         'username': form['username'],
                         'email': form['email'],
-                        'password': hash_password
+                        'password': hash_password,
+                        'favourites': []
                     }
                 )
                 # Checking to see if users details have been saved
                 registered_user = users_collection.find_one(
                     {"username": form['username']})
                 if registered_user:
-                    session['user'] = registered_user['username']
+                    session['user'] = registered_user['_id']
                     flash("Your account has been created!")
                     return redirect(url_for('profile', user=registered_user['username']))
                 else:
@@ -77,7 +78,7 @@ def profile(user):
     if 'user' in session:
         # If so get the user and pass him to template for now
         find_user = users_collection.find_one({"username": user})
-        return render_template('profile.html', user=find_user, favorites_1=mongo.db.favorites.find())
+        return render_template('profile.html', user=find_user, favorites_1=favourites_collection.find())
     else:
         flash("You must be logged in!")
         return redirect(url_for('home'))
@@ -135,11 +136,9 @@ def search():
             api = requests.get(
                 "http://www.omdbapi.com/?apikey={}&s={}".format(apikey, searchTerm))
             data = api.json()
-            print(data)
             movieResults = list()
             for movies in data['Search']:
                 movieResults.append([movies['Title'], movies['Year'], movies['imdbID'], movies['Poster']])
-            print(movieResults)
             return render_template('search.html', movieResults=movieResults)
         else:
             return render_template('search.html')
@@ -151,13 +150,24 @@ def search():
 @app.route('/add_favorite', methods=['POST'])
 def add_favorite():
     if 'user' in session:
-        # Save favourite to DB
-        # Grab objectId
-        fav_id = mongo.db.favourites.insert_one(request.form.to_dict()).inserted_id
-        # Store object ID in favourites of the currenetly logged in user
-        print(str(fav_id))
-        mongo.db.users.update_one({'_id': ObjectId(session['user'])}, { '$push': {'favourites': ObjectId(fav_id)}})
-        flash('Movie added to your favourites!')
+
+        # Check if user has already added movie to favs
+        # Get all the oid from favourites using the imdbid
+        existing_fav_id = list(favourites_collection.find({"imdbid": request.form.to_dict()["imdbid"]}, {"_id": 1}))
+        fav_id_arr = []
+        for fav in existing_fav_id:
+            fav_id_arr.append(fav["_id"])
+        # Compare the oids to the list of user favourite ids.
+        user_fav_id = users_collection.count_documents({"_id": ObjectId(session["user"]), "favourites": {"$in": fav_id_arr }})
+        if user_fav_id > 0 :
+            flash('Movie already added to your favourites!')
+        else:
+            # Save favourite to DB
+            # Grab objectId
+            new_fav_id = favourites_collection.insert_one(request.form.to_dict()).inserted_id
+            # Store object ID in favourites of the currenetly logged in user
+            users_collection.update_one({'_id': ObjectId(session['user'])}, { '$push': {'favourites': ObjectId(new_fav_id)}})
+            flash('Movie added to your favourites!')
         return redirect(url_for('search'))
     else:
         flash('You must be logged in to add a favourite')
@@ -168,8 +178,9 @@ def add_favorite():
 def favorites():
     # Get all the users favourites from the user that is logged in.
     user_favs_ids = users_collection.find_one({"_id": ObjectId(session['user'])}, {"favourites": 1})
+    print(user_favs_ids)
     # Get all the favourites where the _id is in the array of the users favourite ids
-    user_favs = user_favourites.find({ "_id": { "$in": user_favs_ids["favourites"] } }) 
+    user_favs = favourites_collection.find({ "_id": { "$in": user_favs_ids["favourites"] } }) 
     return render_template('favourites.html', user={"favourites": user_favs})
 
 # Deleting a favourite from a users collection
@@ -177,8 +188,10 @@ def favorites():
 def delete_favorites(favorites_id):
     if 'user' in session:
         user_id = session['user']
-        # finds a user by id and removes a favourite where the imdbid matche
-        mongo.db.users.update_one({'_id': ObjectId(user_id)}, { '$pull': { "favourites" : { "_id":favorites_id } } } )
+        # Update the user by the user_id of the logged in user and remove the movie from the favourites array
+        users_collection.update_one({'_id': ObjectId(user_id)}, { '$pull': { "favourites" : ObjectId(favorites_id)  } } )
+        # Delete the favourites document by favourite_id 
+        favourites_collection.remove({'_id': ObjectId(favorites_id)})
         flash('Movie removed from your list')
     else:
         flash('You must be logged in to remove this item')
