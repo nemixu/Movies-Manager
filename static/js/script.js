@@ -1,12 +1,15 @@
-// const user_input = $('#user_input')
-// const apikey = "3c0dea9f";
-// let url = `http://www.omdbapi.com/?apikey=${apikey}&s=Batman`;
+$(document).ready(function () {
+	flashed_messages();
+});
 
-// const fetchMovies = () => {
-//     fetch(url)
-//     .then(result => result.json())
-//     .then(data => {
-//         console.log(data)
-//     })
-// }
-// fetchMovies();
+
+function flashed_messages() {
+	let messages = parseInt($("#messages p").length);
+	if (messages) {
+		$("#alerts").slideDown(1500);
+		setTimeout(() => {
+			$("#alerts").slideUp(1500);
+		}, 7000);
+	}
+}
+console.log('hello')
