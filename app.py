@@ -172,14 +172,18 @@ def add_favorite():
 
 @app.route('/favourites')
 def favorites():
+    user_id = session['user']
+    user = users_collection.find_one({"_id": ObjectId(user_id)})
     return render_template('favourites.html',
-                           favorites=mongo.db.favorites.find())
+                           favorites=mongo.db.favorites.find(), user=user)
 
 
 @app.route('/delete_favorites/<favorites_id>')
 def delete_favorites(favorites_id):
     if 'user' in session:
-        mongo.db.favorites.delete_one({'_id': ObjectId(favorites_id)})
+        user_id = session['user']
+        # finds a user by id and removes a favourite where the imdbid matche
+        mongo.db.users.update_one({'_id': ObjectId(user_id)}, { '$pull': { "favourites" : { "imdbid": favorites_id }}})
         flash('Movie removed from your list')
     else:
         flash('You must be logged in to remove this item')
