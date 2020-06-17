@@ -1,20 +1,19 @@
 import os
 from os import path
-import time
 import requests
 from flask import Flask, render_template, redirect, request, url_for, session, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 
-if path.exists("env.py"):
+if path.exists('env.py'):
     import env
 
 # Connection to Database
 app = Flask(__name__)
-app.config["MONGO_DBNAME"] = "movies_database"
-app.config["MONGO_URI"] = "mongodb+srv://root:winter22@myfirstcluster-0xnxg.mongodb.net/movies_database?retryWrites=true&w=majority"
-app.secret_key = "super secret key"
+app.config["MONGO_DBNAME"] = os.getenv('MONGODB_NAME')
+app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+app.secret_key = os.getenv('SECRET_KEY')
 
 
 mongo = PyMongo(app)
@@ -166,7 +165,7 @@ def add_favorite():
             # Grab objectId
             new_fav_id = favourites_collection.insert_one(request.form.to_dict()).inserted_id
             # Store object ID in favourites of the currenetly logged in user
-            users_collection.update_one({'_id': ObjectId(session['user'])}, { '$push': {'favourites': ObjectId(new_fav_id)}})
+            users_collection.update_one({'_id': ObjectId(session['user'])}, {'$push': {'favourites': ObjectId(new_fav_id)}})
             flash('Movie added to your favourites!')
         return redirect(url_for('search'))
     else:
@@ -180,7 +179,7 @@ def favorites():
     user_favs_ids = users_collection.find_one({"_id": ObjectId(session['user'])}, {"favourites": 1})
     print(user_favs_ids)
     # Get all the favourites where the _id is in the array of the users favourite ids
-    user_favs = favourites_collection.find({ "_id": { "$in": user_favs_ids["favourites"] } }) 
+    user_favs = favourites_collection.find({ "_id": { "$in": user_favs_ids["favourites"]}})
     return render_template('favourites.html', user={"favourites": user_favs})
 
 # Deleting a favourite from a users collection
@@ -189,8 +188,8 @@ def delete_favorites(favorites_id):
     if 'user' in session:
         user_id = session['user']
         # Update the user by the user_id of the logged in user and remove the movie from the favourites array
-        users_collection.update_one({'_id': ObjectId(user_id)}, { '$pull': { "favourites" : ObjectId(favorites_id)  } } )
-        # Delete the favourites document by favourite_id 
+        users_collection.update_one({'_id': ObjectId(user_id)}, {'$pull': {"favourites": ObjectId(favorites_id)}})
+        # Delete the favourites document by favourite_id
         favourites_collection.remove({'_id': ObjectId(favorites_id)})
         flash('Movie removed from your list')
     else:
@@ -202,4 +201,3 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=os.environ.get('PORT'),
             debug=True)
-
