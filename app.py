@@ -10,30 +10,29 @@ if path.exists('env.py'):
     import env
 
 # Connection to Database
-app = Flask(__name__)
-app.config["MONGO_DBNAME"] = os.getenv('MONGODB_NAME')
-app.config["MONGO_URI"] = os.getenv('MONGO_URI')
-app.secret_key = os.getenv('SECRET_KEY')
+APP = Flask(__name__)
+APP.config["MONGO_DBNAME"] = os.getenv('MONGODB_NAME')
+APP.config["MONGO_URI"] = os.getenv('MONGO_URI')
+APP.secret_key = os.getenv('SECRET_KEY')
+mongo = PyMongo(APP)
 
-
-mongo = PyMongo(app)
 
 # Collections
 users_collection = mongo.db.users
 favourites_collection = mongo.db.favourites
 
 
-@app.route('/')
-@app.route('/home')
+@APP.route('/')
+@APP.route('/home')
 def home():
     recents = favourites_collection.find()
     return render_template("home.html", recents=recents)
 
 
 # Register an account
-@app.route('/register', methods=['GET', 'POST'])
+@APP.route('/register', methods=['GET', 'POST'])
 def register():
-    # Check if user is not logged in already
+    ''' Checks user is not already logged into session '''
     if 'user' in session:
         flash('You are already signed in!')
         return redirect(url_for('home'))
@@ -72,7 +71,7 @@ def register():
     return render_template('register.html')
 
 # User profile
-@app.route('/profile/<user>')
+@APP.route('/profile/<user>')
 def profile(user):
     # Check if user is logged in
     if 'user' in session:
@@ -84,7 +83,7 @@ def profile(user):
         return redirect(url_for('home'))
 
 # Login route
-@app.route('/login', methods=['GET'])
+@APP.route('/login', methods=['GET'])
 def login():
     if 'user' in session:
         find_user = users_collection.find_one({"username": session['user']})
@@ -95,7 +94,7 @@ def login():
         return render_template('login.html')
 
 # Authenticate User form request
-@app.route('/user_auth', methods=['POST'])
+@APP.route('/user_auth', methods=['POST'])
 def user_auth():
     form = request.form.to_dict()
     find_user = users_collection.find_one({"username": form['username']})
@@ -119,7 +118,7 @@ def user_auth():
         return redirect(url_for('register'))
 
 # Logout results in clearing the session and logging user out
-@app.route('/logout')
+@APP.route('/logout')
 def logout():
     session.clear()
     flash('You have been logged out!')
@@ -127,7 +126,7 @@ def logout():
 
 
 # Search page route, handling api request
-@app.route('/search', methods=['GET', 'POST'])
+@APP.route('/search', methods=['GET', 'POST'])
 def search():
     try:
         if request.method == 'POST':
@@ -147,7 +146,7 @@ def search():
         return render_template('search.html')
 
 # Adding a favourite to db
-@app.route('/add_favorite', methods=['POST'])
+@APP.route('/add_favorite', methods=['POST'])
 def add_favorite():
     if 'user' in session:
 
@@ -174,17 +173,16 @@ def add_favorite():
         return render_template('login.html')
 
 
-@app.route('/favourites')
+@APP.route('/favourites')
 def favorites():
     # Get all the users favourites from the user that is logged in.
     user_favs_ids = users_collection.find_one({"_id": ObjectId(session['user'])}, {"favourites": 1})
-    print(user_favs_ids)
-    # Get all the favourites where the _id is in the array of the users favourite ids
+     # Get all the favourites where the _id is in the array of the users favourite ids
     user_favs = favourites_collection.find({ "_id": {"$in": user_favs_ids["favourites"]}})
     return render_template('favourites.html', user={"favourites": user_favs})
 
 # Deleting a favourite from a users collection
-@app.route('/delete_favorites/<favorites_id>')
+@APP.route('/delete_favorites/<favorites_id>')
 def delete_favorites(favorites_id):
     if 'user' in session:
         user_id = session['user']
@@ -199,6 +197,6 @@ def delete_favorites(favorites_id):
 
 
 if __name__ == '__main__':
-    app.run(host=os.environ.get('IP'),
+    APP.run(host=os.environ.get('IP'),
             port=os.environ.get('PORT'),
             debug=True)
