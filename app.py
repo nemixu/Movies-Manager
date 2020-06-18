@@ -29,6 +29,7 @@ def home():
     recents = favourites_collection.find()
     return render_template("home.html", recents=recents)
 
+
 # Register an account
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -57,10 +58,9 @@ def register():
                     }
                 )
                 # Checking to see if users details have been saved
-                registered_user = users_collection.find_one(
-                    {"username": form['username']})
+                registered_user = users_collection.find_one({"username": form['username']})
                 if registered_user:
-                    session['user'] = registered_user['_id']
+                    session['user'] = str(registered_user['_id'])
                     flash("Your account has been created!")
                     return redirect(url_for('profile', user=registered_user['username']))
                 else:
@@ -158,7 +158,7 @@ def add_favorite():
         for fav in existing_fav_id:
             fav_id_arr.append(fav["_id"])
         # Compare the oids to the list of user favourite ids.
-        user_fav_id = users_collection.count_documents({"_id": ObjectId(session["user"]), "favourites": {"$in": fav_id_arr }})
+        user_fav_id = users_collection.count_documents({"_id": ObjectId(session["user"]), "favourites": {"$in": fav_id_arr}})
         if user_fav_id > 0 :
             flash('Movie already added to your favourites!')
         else:
@@ -180,7 +180,7 @@ def favorites():
     user_favs_ids = users_collection.find_one({"_id": ObjectId(session['user'])}, {"favourites": 1})
     print(user_favs_ids)
     # Get all the favourites where the _id is in the array of the users favourite ids
-    user_favs = favourites_collection.find({ "_id": { "$in": user_favs_ids["favourites"]}})
+    user_favs = favourites_collection.find({ "_id": {"$in": user_favs_ids["favourites"]}})
     return render_template('favourites.html', user={"favourites": user_favs})
 
 # Deleting a favourite from a users collection
