@@ -26,7 +26,8 @@ favourites_collection = mongo.db.favourites
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template("home.html")
+    recents = favourites_collection.find()
+    return render_template("home.html", recents=recents)
 
 # Register an account
 @app.route('/register', methods=['GET', 'POST'])
