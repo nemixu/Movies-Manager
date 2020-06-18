@@ -181,31 +181,96 @@ Known bugs will be highlighted here.
 
 ## Deployment:
 
-When deploying this application using GitHub Pages the following steps were made:
+This application was developed on Visual Studio Code, using git and GitHub to host the repository.
 
-* Opened up <strong>GitHub</strong> in the browser.
-* Signed in using username and password.
-* Selected my <strong>repositories</strong>.
-* Navigated to <strong>repository name</strong>.
-* In the top navigation clicked <strong>'settings'</strong>.
-* Scrolled down to the <strong>GitHub Pages</strong> area. 
-* Selected <strong>'Master Branch'</strong> from the <strong>'Source'</strong> dropdown menu.
-* Clicked to confirm my selection.
-* Application now live on GitHub Pages.
+### Cloing the application from GitHub:
 
-#### Running the application Locally
+<strong>Ensure</strong> you have the following installed:
+* PIP
+* Python 3
+* Git
 
-Cloning the repository from GitHub:
+<strong>Make sure you have an account at <a href="https://www.mongodb.com/">MongoDB</a> in order to construct the database.</strong>
 
-* Navigate to <strong>link here</strong>.
-* Click the green <strong>'Clone or Download'</strong> button.
-* Copy the <strong>url</strong> in the dropdown box.
-* Using your favourite <strong>IDE</strong> open up your preferred <strong>terminal</strong>.
-* Navigate to your desired file location. 
-* Copy the following <strong>code</strong> and input it into your terminal to clone Repository.
- ```git
-  git clone url link here
-   ```
+<em>WARNING: You may need to follow a different guide based on the OS you are using, read more <a href="https://python.readthedocs.io/en/latest/library/venv.html">here.</a></em>
+
+* 1: <strong>Clone</strong> the Movies Manager repository by either downloading from <a href="https://github.com/nemixu/movies-manager"> here</a>, or if you have Git installed typing the following command into your terminal.
+```bash
+git clone https://github.com/nemixu/movies-manager
+```
+* 2: <strong>Navigate</strong> to this folder in your terminal for e.g below.
+```bash
+cd movies-manager
+```
+* 3: <strong>Enter</strong> the following command into your terminal.
+```bash
+python3 -m .venv venv
+```
+* 4: <strong>Initilaize</strong> the environment by using the following command.
+```bash
+.venv\bin\activate 
+```
+* 5: <strong>Install</strong> the relevant requirements & dependancies from the requirements.txt file.
+```bash
+pip3 -r requirements.txt
+```
+* 6: In your IDE now <strong>create</strong> a file where you can store your SECRET_KEY and your MONGO_URI, follow the schema structure located in data/schemas to properly setup the Mongo Collections.
+<em>NOTE: I developed this website on Visual Studio Code and used open variables within the APP.py. Replace the keys below.</em>
+```json
+{
+    "python.pythonPath": "env/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintArgs": ["--load-plugins=pylint_flask"],
+    "files.autoSave": "onFocusChange",
+    "files.useExperimentalFileWatcher": true,
+    "terminal.integrated.env.osx": {
+      "SECRET_KEY": "<your_secret_key>",
+      "DEV": "1",
+      "FLASK_DEBUG": "1",
+      "MONGO_URI": "<your_mongo_uri>"
+    }      
+}
+```
+* 7: Run the application using 
+```bash
+flask run 
+```
+or 
+```bash
+Python3 app.py
+```
+
+### Deploying Movies-Manager to Heroku:
+
+* 1: <strong>Create</strong> a requirements.txt file using the following command.
+```bash
+pip3 freeze > requirements.txt
+```
+* 2: <strong>Create</strong> a Procfile with the following command.
+```bash
+echo web: python3 app.py > Procfile
+```
+*2.1: <strong>Dynos</strong>will also need to be scaled.
+```bash
+heroku ps:scale web=1
+```
+* 3: <strong>Push</strong> these newly created files to your repository.
+* 4: <strong>Create</strong> a new app for this project on the Heroku Dashboard.
+* 5: <strong>Select</strong> your <strong>deployment</strong> method by clicking on the <strong>deployment</strong> method button and select GitHub.
+* 6: On the dashboard, <strong>set</strong> the following config variables:
+
+**Key**|**Value**
+:-----:|:-----:
+IP|0.0.0.0
+PORT|5000
+MONGO\_URI|mongodb+srv://<username>:<password>@<cluster\_name>-qtxun.mongodb.net/<database\_name>?retryWrites=true&w=majority
+SECRET\_KEY|"your\_secret\_key"
+* 7: Click the deploy button on the Heroku dashboard.
+* 8: The site has been deployed the Heroku.
+
+
+
 
 ## Closing Notes:
 
@@ -213,4 +278,6 @@ Any additional notes to go here
 
 ## Credits: 
 
-Credits will go here
+Miroslav Svec - for the solution on user logins and auth via hashing passwords, this was used and highly modified to suit project needs.
+* <a href="http://www.omdbapi.com/">Movie API used</a>
+* <a href="https://unsplash.com/">Stock Images used</a>
