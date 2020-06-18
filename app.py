@@ -221,6 +221,17 @@ def delete_favorites(favorites_id):
         flash('You must be logged in to remove this item')
     return redirect(url_for('favorites'))
 
+@APP.route('/edit')
+def edit():
+    '''
+    Edit specific user details when called.
+    '''
+
+    return render_template()
+
+
+
+
 
 if __name__ == '__main__':
     APP.run(host=os.environ.get('IP'),
