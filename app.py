@@ -32,7 +32,7 @@ def home():
 # Register an account
 @APP.route('/register', methods=['GET', 'POST'])
 def register():
-    ''' Checks user is not already logged into session '''
+    ''' Checks user is not already logged in, register if they are not present in db'''
     if 'user' in session:
         flash('You are already signed in!')
         return redirect(url_for('home'))
@@ -73,7 +73,7 @@ def register():
 # User profile
 @APP.route('/profile/<user>')
 def profile(user):
-    # Check if user is logged in
+    ''' find user profile and return logged in profile and return favourites'''
     if 'user' in session:
         # If so get the user and pass him to template for now
         find_user = users_collection.find_one({"username": user})
@@ -85,6 +85,7 @@ def profile(user):
 # Login route
 @APP.route('/login', methods=['GET'])
 def login():
+    '''Find user by username on form submission'''
     if 'user' in session:
         find_user = users_collection.find_one({"username": session['user']})
         if find_user:
@@ -94,8 +95,8 @@ def login():
         return render_template('login.html')
 
 # Authenticate User form request
-@APP.route('/user_auth', methods=['POST'])
-def user_auth():
+@APP.route('/auth', methods=['POST'])
+def auth():
     form = request.form.to_dict()
     find_user = users_collection.find_one({"username": form['username']})
     # Check for user in database
