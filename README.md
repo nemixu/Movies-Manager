@@ -103,6 +103,40 @@ As this was the first time working with databases and schemas I was unsure how t
 I made a change to the schema and then added an array inside of the Users document that would show the users favourites only which was fine and worked well for the purpose.
 An issue I then had was the relationship was still not valid as it was possible to duplicate the same movie favourite over and over instead of just calling the data already if it was once added to the database.
 
+The Schema I final chose for this project was, a users relationship with many movies. The user collection and a favourites collection. Inside the user collection they would have a favourite Array that would house the favourites ID from the favourites collection.
+
+favourites Collection:
+
+Example
+
+```json
+{
+  "_id": {
+    "$oid": "5eea4926fbe2a5a0d4378163"
+  },
+  "title": "Batman Returns",
+  "year": "1992",
+  "imdbid": "tt0103776",
+  "poster": "https://m.media-amazon.com/images/M/MV5BOGZmYzVkMmItM2NiOS00MDI3LWI4ZWQtMTg0YWZkODRkMmViXkEyXkFqcGdeQXVyODY0NzcxNw@@._V1_SX300.jpg"
+}
+```
+
+```json
+{
+  "_id": {
+    "$oid": "5ee88da57289940080b3b142"
+  },
+  "username": "test",
+  "email": "email@email.com",
+  "password": "hashed Password goes here",
+  "favourites": [
+    {
+      "$oid": "5eea4926fbe2a5a0d4378163"
+    }
+  ]
+}
+
+```
 
 #### Background:
 
@@ -112,7 +146,7 @@ An issue I then had was the relationship was still not valid as it was possible 
 
 ## Features:
 
-*
+* 
 *
 *
 *
@@ -122,18 +156,22 @@ An issue I then had was the relationship was still not valid as it was possible 
 
 ### Languages:
 
-HTML
-CSS
-JavaScript ES6
-Python
+* <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a>
+* <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a>
+* <a href="https://www.w3schools.com/js/">JavaScript</a>
+* <a href="https://www.python.org/">Python</a>
 
 ### Tools & Libraries:
-Jquery
-Git
-Bootstrap
-Font Awesome
-flask
-MongoDB
+
+* <a href="https://jquery.com/">jQuery</a>
+* <a href="https://git-scm.com/">Git</a>
+* <a href="https://getbootstrap.com/">Bootstrap</a>
+* <a href="https://fontawesome.com/icons?d=gallery">Font-Awesome</a>
+* <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a>
+* <a href="https://pymongo.readthedocs.io/en/stable/">PyMongo</a>
+* <a href="https://flask.palletsprojects.com/en/1.0.x/">Flask</a>
+* <a href="https://jinja.palletsprojects.com/en/2.10.x/">Jinja</a>
+
 
 ## Testing:
 
@@ -154,8 +192,9 @@ This section will be updated with testing done on this project.
 
 ### Testing Outcome:
 
+This project will not need alot of testing due to the scope of the application.
 
-## Bugs:
+
 
 #### Bugs During Development:
 
@@ -169,11 +208,12 @@ Issues with the search data that was displayhed from div's and h3's it would not
 
 For loop on favourites page where I was using the incorrect variable name and it was not pulling the correct information.
 
-Had issue with the profile variable, I had called a global variable and re-used the global name on a local variable and it was giving errors, changing the var name resolved this.
+Had issue with the profile variable, I had called a global variable and re-used the global name on a local variable and it was giving errors, changing the variable name resolved this.
 
-During the development of this application, I originally wanted to have my database scheme as simple as possible, I begun planning my database to have my favourites for a user nested in an array inside the users database information. After planning my application around this, during the development stage It became clear that this was not the correct way to do this and it also ended up that there would be mutliple duplications of movies in the database.
+One of the most difficult bugs / issues I had during the development of this application was with the favourites section, adding and removing a favourite. I was comparing a string vs a Object id, and when I was printing the data I was receiving like this.
+{"$oid": "5ee88da57289940080b3b142"} but i needed just the "5ee88da57289940080b3b142" string value to compare, I was getting errors such as Object of type ObjectId is not JSON serializable, after resolving the issue and researching further a better solution would have been to add some form of json interp or bson interp, however wrapping the query in str() resolved the issues I was having.
 
-Tor resolve this I changed how the add to favourites worked and the favourites section, upon changing the queries i ran into errors like this, "<pymongo.cursor.Cursor object at 0x04694700>" and this was because I was passing into the database a string but was requesting and object id. when the object id was passed correctly into the favourites and called correctly the issue was resolved.
+I changed how the add to favourites worked and the favourites section, upon changing the queries i ran into errors like this, "<pymongo.cursor.Cursor object at 0x04694700>" and this was because I was passing into the database a string but was requesting and object id. when the object id was passed correctly into the favourites and called correctly the issue was resolved.
 
 #### Known Bugs:
 
@@ -279,5 +319,6 @@ Any additional notes to go here
 ## Credits: 
 
 Miroslav Svec - for the solution on user logins and auth via hashing passwords, this was used and highly modified to suit project needs.
+Simen Daehlin - For suggesting project ideas, reviewing project and also providing readme examples"
 * <a href="http://www.omdbapi.com/">Movie API used</a>
 * <a href="https://unsplash.com/">Stock Images used</a>
