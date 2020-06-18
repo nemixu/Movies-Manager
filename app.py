@@ -25,6 +25,9 @@ favourites_collection = mongo.db.favourites
 @APP.route('/')
 @APP.route('/home')
 def home():
+    '''
+    Home function, that holds the recent favourites to be displayed to users.
+    '''
     recents = favourites_collection.find()
     return render_template("home.html", recents=recents)
 
@@ -32,7 +35,9 @@ def home():
 # Register an account
 @APP.route('/register', methods=['GET', 'POST'])
 def register():
-    ''' Checks user is not already logged in, register if they are not present in db'''
+    ''' 
+    Checks user is not already logged in, register if they are not present in db
+    '''
     if 'user' in session:
         flash('You are already signed in!')
         return redirect(url_for('home'))
@@ -73,7 +78,9 @@ def register():
 # User profile
 @APP.route('/profile/<user>')
 def profile(user):
-    ''' find user profile and return logged in profile and return favourites'''
+    ''' 
+    find user profile and return logged in profile and return favourites
+    '''
     if 'user' in session:
         # If so get the user and pass him to template for now
         find_user = users_collection.find_one({"username": user})
@@ -85,7 +92,9 @@ def profile(user):
 # Login route
 @APP.route('/login', methods=['GET'])
 def login():
-    '''Find user by username on form submission'''
+    '''
+    Find user by username on form submission
+    '''
     if 'user' in session:
         find_user = users_collection.find_one({"username": session['user']})
         if find_user:
@@ -97,6 +106,10 @@ def login():
 # Authenticate User form request
 @APP.route('/auth', methods=['POST'])
 def auth():
+    '''
+    Authenticate the user off their form input vs the users collection,
+    and their password vs the hashed password
+    '''
     form = request.form.to_dict()
     find_user = users_collection.find_one({"username": form['username']})
     # Check for user in database
@@ -105,7 +118,7 @@ def auth():
         if check_password_hash(find_user['password'], form['user_password']):
             # Log user in (add to session)
             session['user'] = str(find_user['_id'])
-            # If the user is admin redirect him to admin area
+            # If the user is admin redirect him to admin area for future release
             if session['user'] == "admin":
                 return redirect(url_for('admin'))
             else:
@@ -121,7 +134,9 @@ def auth():
 
 @APP.route('/logout')
 def logout():
-    '''Logout results in clearing the session and logging user out'''
+    '''
+    Logout results in clearing the session and logging user out
+    '''
     session.clear()
     flash('You have been logged out!')
     return redirect(url_for('home'))
@@ -129,7 +144,10 @@ def logout():
 
 @APP.route('/search', methods=['GET', 'POST'])
 def search():
-    '''On request, handles request from api, returns movies and is appended to movie_results'''
+    '''
+    On request, handles request from api, 
+    returns movies and is appended to movie_results
+    '''
     try:
         if request.method == 'POST':
             search_term = request.form['search-term']
@@ -150,7 +168,10 @@ def search():
 
 @APP.route('/add_favorite', methods=['POST'])
 def add_favorite():
-    '''Checks users favourites if does not exist, add favourite to users collection'''
+    '''
+    Checks users favourites if does not exist,
+    add favourite to users collection
+    '''
     if 'user' in session:
         # Get all the oid from favourites using the imdbid
         existing_fav_id = list(favourites_collection.find({"imdbid": request.form.to_dict()["imdbid"]}, {"_id": 1}))
@@ -174,16 +195,22 @@ def add_favorite():
 
 @APP.route('/favourites')
 def favorites():
-    # Get all the users favourites from the user that is logged in.
+    '''
+    Get all the users favourites from the user that is logged in,
+    get all the favourites where the _id is in the array of the users favourite ids
+    '''
     user_favs_ids = users_collection.find_one({"_id": ObjectId(session['user'])}, {"favourites": 1})
      # Get all the favourites where the _id is in the array of the users favourite ids
-    user_favs = favourites_collection.find({ "_id": {"$in": user_favs_ids["favourites"]}})
+    user_favs = favourites_collection.find({"_id": {"$in": user_favs_ids["favourites"]}})
     return render_template('favourites.html', user={"favourites": user_favs})
 
-# Deleting a favourite from a users collection
+
 @APP.route('/delete_favorites/<favorites_id>')
 def delete_favorites(favorites_id):
-    '''Deleting a favourite from the users collection and removing the movies from favs array'''
+    '''
+    Deleting a favourite from the users collection,
+    removing the movies from favs array
+    '''
     if 'user' in session:
         user_id = session['user']
         users_collection.update_one({'_id': ObjectId(user_id)}, {'$pull': {"favourites": ObjectId(favorites_id)}})
