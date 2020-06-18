@@ -106,7 +106,6 @@ An issue I then had was the relationship was still not valid as it was possible 
 The Schema I final chose for this project was, a users relationship with many movies. The user collection and a favourites collection. Inside the user collection they would have a favourite Array that would house the favourites ID from the favourites collection.
 
 favourites Collection:
-
 Example
 
 ```json
@@ -121,6 +120,8 @@ Example
 }
 ```
 
+users Collection:
+Example
 ```json
 {
   "_id": {
