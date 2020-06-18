@@ -118,40 +118,40 @@ def auth():
         flash("You must be registered!")
         return redirect(url_for('register'))
 
-# Logout results in clearing the session and logging user out
+
 @APP.route('/logout')
 def logout():
+    '''Logout results in clearing the session and logging user out'''
     session.clear()
     flash('You have been logged out!')
     return redirect(url_for('home'))
 
 
-# Search page route, handling api request
 @APP.route('/search', methods=['GET', 'POST'])
 def search():
+    '''On request, handles request from api, returns movies and is appended to movie_results'''
     try:
         if request.method == 'POST':
-            searchTerm = request.form['search-term']
+            search_term = request.form['search-term']
             apikey = "3c0dea9f"
             api = requests.get(
-                "http://www.omdbapi.com/?apikey={}&s={}".format(apikey, searchTerm))
+                "http://www.omdbapi.com/?apikey={}&s={}".format(apikey, search_term))
             data = api.json()
-            movieResults = list()
+            movie_results = list()
             for movies in data['Search']:
-                movieResults.append([movies['Title'], movies['Year'], movies['imdbID'], movies['Poster']])
-            return render_template('search.html', movieResults=movieResults)
+                movie_results.append([movies['Title'], movies['Year'], movies['imdbID'], movies['Poster']])
+            return render_template('search.html', movie_results=movie_results)
         else:
             return render_template('search.html')
     except KeyError:
         # will add code here to handle empty searches or searches that are not specific
         return render_template('search.html')
 
-# Adding a favourite to db
+
 @APP.route('/add_favorite', methods=['POST'])
 def add_favorite():
+    '''Checks users favourites if does not exist, add favourite to users collection'''
     if 'user' in session:
-
-        # Check if user has already added movie to favs
         # Get all the oid from favourites using the imdbid
         existing_fav_id = list(favourites_collection.find({"imdbid": request.form.to_dict()["imdbid"]}, {"_id": 1}))
         fav_id_arr = []
@@ -162,10 +162,8 @@ def add_favorite():
         if user_fav_id > 0 :
             flash('Movie already added to your favourites!')
         else:
-            # Save favourite to DB
-            # Grab objectId
+            # Save favourite to DB and store object ID into favourites of the currently logged in user
             new_fav_id = favourites_collection.insert_one(request.form.to_dict()).inserted_id
-            # Store object ID in favourites of the currenetly logged in user
             users_collection.update_one({'_id': ObjectId(session['user'])}, {'$push': {'favourites': ObjectId(new_fav_id)}})
             flash('Movie added to your favourites!')
         return redirect(url_for('search'))
@@ -185,9 +183,9 @@ def favorites():
 # Deleting a favourite from a users collection
 @APP.route('/delete_favorites/<favorites_id>')
 def delete_favorites(favorites_id):
+    '''Deleting a favourite from the users collection and removing the movies from favs array'''
     if 'user' in session:
         user_id = session['user']
-        # Update the user by the user_id of the logged in user and remove the movie from the favourites array
         users_collection.update_one({'_id': ObjectId(user_id)}, {'$pull': {"favourites": ObjectId(favorites_id)}})
         # Delete the favourites document by favourite_id
         favourites_collection.remove({'_id': ObjectId(favorites_id)})
