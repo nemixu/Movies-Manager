@@ -28,14 +28,13 @@ def home():
     '''
     Home function, that holds the recent favourites to be displayed to users.
     '''
-    recents = favourites_collection.find()
-    return render_template("home.html", recents=recents)
+    return render_template("home.html", recents=favourites_collection.find())
 
 
 # Register an account
 @APP.route('/register', methods=['GET', 'POST'])
 def register():
-    ''' 
+    '''
     Checks user is not already logged in, register if they are not present in db
     '''
     if 'user' in session:
@@ -83,11 +82,10 @@ def profile(user):
     '''
     if 'user' in session:
         # If so get the user and pass him to template for now
-        find_user = users_collection.find_one({"username": user})
+        find_user = users_collection.find_one({"_id": ObjectId(user)}, {"username": 1})
         return render_template('profile.html', user=find_user, favorites_1=favourites_collection.find())
-    else:
-        flash("You must be logged in!")
-        return redirect(url_for('home'))
+    flash("You must be logged in!")
+    return redirect(url_for('home'))
 
 # Login route
 @APP.route('/login', methods=['GET'])
@@ -96,10 +94,11 @@ def login():
     Find user by username on form submission
     '''
     if 'user' in session:
-        find_user = users_collection.find_one({"username": session['user']})
+        find_user = users_collection.find_one({"_id": ObjectId(session["user"])}, {"_id": 1})
+        # find_user = users_collection.find_one({"username": session['user']})
         if find_user:
             flash('You are already logged in!')
-            return redirect(url_for('profile', user=find_user['username']))
+            return redirect(url_for('profile', user=find_user['_id']))
     else:
         return render_template('login.html')
 
@@ -123,7 +122,7 @@ def auth():
                 return redirect(url_for('admin'))
             else:
                 flash("You were logged in!")
-                return redirect(url_for('profile', user=find_user['username']))
+                return redirect(url_for('profile', user=find_user['_id']))
         else:
             flash("Wrong password or username!")
             return redirect(url_for('login'))
@@ -180,7 +179,7 @@ def add_favorite():
             fav_id_arr.append(fav["_id"])
         # Compare the oids to the list of user favourite ids.
         user_fav_id = users_collection.count_documents({"_id": ObjectId(session["user"]), "favourites": {"$in": fav_id_arr}})
-        if user_fav_id > 0 :
+        if user_fav_id > 0:
             flash('Movie already added to your favourites!')
         else:
             # Save favourite to DB and store object ID into favourites of the currently logged in user
@@ -221,15 +220,20 @@ def delete_favorites(favorites_id):
         flash('You must be logged in to remove this item')
     return redirect(url_for('favorites'))
 
-@APP.route('/edit')
+@APP.route('/edit', methods=['POST'])
 def edit():
     '''
-    Edit specific user details when called.
+    Edit a favourite from the users collection
     '''
-
-    return render_template()
-
-
+    if 'user' in session:
+        query = {'_id': ObjectId(request.form.get('_id'))}
+        projection = {'title': request.form.get('title'), 'year': request.form.get('year')}
+        # Edit the favourites document by favourite_id
+        favourites_collection.update_one(query, {'$set': projection})
+        flash('Movie details updated')
+    else:
+        flash('You must be logged in to remove this item')
+    return redirect(url_for('profile', user=session['user']))
 
 
 
