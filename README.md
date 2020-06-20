@@ -6,10 +6,9 @@ This Project is for educational purposes only and is used to demonstrate the tec
 
 ## Contents:
 
-* UX 
-    * Project Goals
+* [UX](#UX) 
+    * [Project Goals](#Project-Goals) 
     * Target Audience
-    * Site Owner Goals
     * User Requirements and Expectations
     * Design Choices
         * Fonts
@@ -18,15 +17,14 @@ This Project is for educational purposes only and is used to demonstrate the tec
         * Styling 
         * Images
         * Backgrounds
-* WireFrames
-* Features
-    * Features that have been developed
-    * Features that will be implimented in future deployments
-* Technologies Used
-* Testing
-* Bugs
-* Deployment
-* Credits  
+* [Wire Frames](#Wireframes)
+* [Features](#Features)
+    * [Features to be implemented](#Features-that-will-be-implimented-in-future-deployments)
+* [Technology Used](#Technology-Used)
+* [Testing](#Testing)
+* [Bugs](#Bugs-During-Development)
+* [Deployment](#Deployment)
+* [Credits](#Credits) 
 
 ## UX (User Experience)
 ### Project Goals
@@ -223,7 +221,7 @@ Result = Unable to do so as the db is checked if the username is already taken.
 
 ### Testing Outcome:
 
-This project will not need alot of testing due to the scope of the application.
+Testing this application was carried out manually
 
 
 
