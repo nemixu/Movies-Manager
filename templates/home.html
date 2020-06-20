@@ -85,6 +85,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
                 <img src="https://i.ibb.co/FDGqCmM/papers-co-ag74-interstellar-wide-space-film-movie-art-33-iphone6-wallpaper.jpg" class="rounded float-left movie-img" alt="Movie Image">
+                <a target="_blank" rel="noopener" href="https://www.imdb.com/title/tt0816692/"><i class="fa fa-imdb"></i></a>
                 <h3 class="movie-title">
                     Interstellar
                 </h3>
@@ -116,27 +117,28 @@
                 </div>
             </div>
         </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                
-           
-{% for movie in recents %}
-<p>{{movie.poster}}</p>
-{% endfor %}
-</div>
-<div class="col-6">
-<p>movies text goes here</p>
-</div>
-<div class="col-6">
-<p>movies text goes here</p>
-</div>
-<div class="col-6">
-<p>movies text goes here</p>
-</div>
+     <div class="container">
+    <div class="container" id="wrapper-recents">
+        <div class="row">    
+            {% for movie in recents %}       
+            <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
+                <img src="{{ movie.poster }}" class="rounded float-left movie-img" alt="Movie Image">
+                <textarea name="title" id="title" type="hidden" class="hidden-text">{{ movie.title }}</textarea>
+                <textarea name="year" id="year" type="hidden" class="hidden-text">{{ movie.year }}</textarea>
+                <textarea name="imdbid" id="imdbid" type="hidden" class="hidden-text">{{ movie.imdbid }}</textarea>
+                <textarea name="poster" id="poster" type="hidden" class="hidden-text">{{ movie.poster }}</textarea>
+                <h3 class="movie-title">
+                    <a target="_blank" rel="noopener" href="https://www.imdb.com/title/{{ movie.imdbid }}/"><i class="fa fa-imdb"></i></a>
+                        {{ movie.title }} 
+                    </h3>
+                    <h4 class="movie-year">
+                      {{ movie.year }}
+                    </h4>
+                </div>
+            {% endfor %}
+        </div>   
         </div>
     </div>
-
 </section>
 
 {% endblock %}
