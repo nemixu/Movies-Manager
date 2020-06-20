@@ -247,9 +247,14 @@ One of the most difficult bugs / issues I had during the development of this app
 
 I changed how the add to favourites worked and the favourites section, upon changing the queries i ran into errors like this, "<pymongo.cursor.Cursor object at 0x04694700>" and this was because I was passing into the database a string but was requesting and object id. when the object id was passed correctly into the favourites and called correctly the issue was resolved.
 
+Bug with url_for('profile', userid), Originally I had setup my application to handle the username in the session, But to stick with best practices I wanted to then change it to be the user Id always. I was having issues with passing the url correctly. But during the trouble shooting process I realised I was passing urf_for('user', userid).
+
+Search function bug, that if you do not pass in specific details in search you get nothing back, this is due to the api handling the requests, if field is too short, the response from the api is Too many results
+
 #### Known Bugs:
 
-Known bugs will be highlighted here.
+Known bug, from the API it does not have images / posters for every movie. This is something I found out testing.
+API only handles specific searches, if search is not broad enough it will return false or Too many results, to handle this in the most basic way to ensure user has a good experience I have ensured the min character length is 4.
 
 ## Deployment:
 
