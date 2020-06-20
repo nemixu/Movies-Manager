@@ -65,7 +65,7 @@ def register():
                 if registered_user:
                     session['user'] = str(registered_user['_id'])
                     flash("Your account has been created!")
-                    return redirect(url_for('profile', user=registered_user['username']))
+                    return redirect(url_for('home'))
                 else:
                     flash("There was an issue registering your account")
                     return redirect(url_for('register'))
@@ -149,21 +149,17 @@ def search():
     On request, handles request from api,
     returns movies and is appended to movie_results
     '''
-    try:
-        if request.method == 'POST':
-            search_term = request.form['search-term']
-            apikey = "3c0dea9f"
-            api = requests.get(
-                "http://www.omdbapi.com/?apikey={}&s={}".format(apikey, search_term))
-            data = api.json()
-            movie_results = list()
-            for movies in data['Search']:
-                movie_results.append([movies['Title'], movies['Year'], movies['imdbID'], movies['Poster']])
-            return render_template('search.html', movie_results=movie_results)
-        else:
-            return render_template('search.html')
-    except KeyError:
-        # will add code here to handle empty searches or searches that are not specific
+    if request.method == 'POST':
+        search_term = request.form['search-term']
+        apikey = "3c0dea9f"
+        api = requests.get(
+            "http://www.omdbapi.com/?apikey={}&s={}".format(apikey, search_term))
+        data = api.json()
+        movie_results = list()
+        for movies in data['Search']:
+            movie_results.append([movies['Title'], movies['Year'], movies['imdbID'], movies['Poster']])
+        return render_template('search.html', movie_results=movie_results)
+    else:
         return render_template('search.html')
 
 
