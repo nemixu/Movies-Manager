@@ -224,7 +224,7 @@ def delete_favorites(favorites_id):
         flash('Movie removed from your list')
     else:
         flash('You must be logged in to remove this item')
-    return redirect(url_for('favorites'))
+    return redirect(url_for('profile', user=user_id))
 
 
 @APP.route('/edit', methods=['POST'])
