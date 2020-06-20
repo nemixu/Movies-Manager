@@ -4,7 +4,7 @@
     <div class="col">
 <form method="post" action="search" id="search-form">
     <div class="form-group">
-      <label for="exampleInputPassword1">Search a movie title</label>
+      <label aria-labelledby="search-form">Search a movie title</label>
       <input type="text" class="form-control" id="search-term" placeholder="search" name="search-term" minlength="4" required>
     </div>
     <button class="btn btn-primary" id="search-button">Search</button>
@@ -23,10 +23,10 @@
           <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
             <form action="{{ url_for('add_favorite') }}" method="POST">
               <img src="{{ movie[3] }}" class="rounded float-left movie-img" alt="Sorry no image to display">
-              <textarea name="title" id="title" type="hidden" class="hidden-text">{{ movie[0] }}</textarea>
-              <textarea name="year" id="year" type="hidden" class="hidden-text">{{ movie[1] }}</textarea>
-              <textarea name="imdbid" id="imdbid" type="hidden" class="hidden-text">{{ movie[2] }}</textarea>
-              <textarea name="poster" id="poster" type="hidden" class="hidden-text">{{ movie[3] }}</textarea>
+              <textarea name="title" class="hidden-text">{{ movie[0] }}</textarea>
+              <textarea name="year" class="hidden-text">{{ movie[1] }}</textarea>
+              <textarea name="imdbid" class="hidden-text">{{ movie[2] }}</textarea>
+              <textarea name="poster" class="hidden-text">{{ movie[3] }}</textarea>
               <h3 class="movie-title">
                 <a target="_blank" rel="noopener" href="https://www.imdb.com/title/{{ movie [2]}}/"><i class="fa fa-imdb"></i></a>
                   {{ movie[0] }} 
@@ -35,8 +35,8 @@
                 {{ movie[1] }}
               </h4>
               <input type="submit" id="add-favorites" class="input" value="Add to Favorites">
-          </div>
           ​</form>
+        </div>
           {% endfor %} 
       </div> 
   </div>
