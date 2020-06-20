@@ -50,7 +50,7 @@ body {
 }
 
 .main-content {
-    min-height: calc(100vh - 74px - 90px);
+    min-height: calc(100vh - 34px - 90px);
 }
 /*-- Home Page Styling --*/
 
@@ -75,9 +75,8 @@ body {
     text-shadow: 0px 3px 3px rgba(0, 0, 0, .2);
 }
 
-#home-main {
-    padding: 20px 40px;
-
+#top-picks {
+    padding-top: 25px;
 }
 
 .fa-imdb {
@@ -149,8 +148,7 @@ body {
     justify-content: center;
     width: 100%;
     min-height: 100%;
-    padding: 20px;
-    margin-top: 200px;
+    padding-top: 6.5rem;
 }
 
 .formInputs {
@@ -339,12 +337,11 @@ body {
 #alerts {
     position: absolute;
     display: none;
-    min-height: 50px;
-    top: 6%;
     left: 0;
+    margin-top:60px;
     z-index: 999;
     background-color: rgba(0, 0, 0, 0.5);
-    color: #a32a2a;
+    color:#ffffff;
 }
 
 #alerts p {
@@ -403,3 +400,18 @@ body {
     margin-top: 10rem;
 }
 
+@media screen and (min-width: 768px) {
+
+
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding-top: 12.5rem;
+    padding-bottom:4rem;
+}
+
+}
