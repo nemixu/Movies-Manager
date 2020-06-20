@@ -8,6 +8,10 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.label {
+    display: none;
+    margin:0;
+}
 
 /*-- Line Dividers -- */
 
