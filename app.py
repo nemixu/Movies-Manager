@@ -77,13 +77,19 @@ def register():
 # User profile
 @APP.route('/profile/<user>')
 def profile(user):
-    ''' 
+    '''
     find user profile and return logged in profile and return favourites
     '''
     if 'user' in session:
-        # If so get the user and pass him to template for now
-        find_user = users_collection.find_one({"_id": ObjectId(user)}, {"username": 1})
-        return render_template('profile.html', user=find_user, favorites_1=favourites_collection.find())
+        find_user = users_collection.find_one({"_id": ObjectId(session["user"])}, {"_id": 1})
+        user_session = find_user['_id']
+        user_favs_ids = users_collection.find_one({"_id": ObjectId(session['user'])},
+                                                  {"favourites": 1})
+        user_favs = favourites_collection.find({"_id": {"$in": user_favs_ids["favourites"]}})
+        user_account = users_collection.find_one({"_id": ObjectId(session['user'])},
+                                                 {"username": 1})
+        return render_template('profile.html',
+                               user=user_session, user_favs=user_favs, user_account=user_account)
     flash("You must be logged in!")
     return redirect(url_for('home'))
 
@@ -95,7 +101,6 @@ def login():
     '''
     if 'user' in session:
         find_user = users_collection.find_one({"_id": ObjectId(session["user"])}, {"_id": 1})
-        # find_user = users_collection.find_one({"username": session['user']})
         if find_user:
             flash('You are already logged in!')
             return redirect(url_for('profile', user=find_user['_id']))
@@ -144,7 +149,7 @@ def logout():
 @APP.route('/search', methods=['GET', 'POST'])
 def search():
     '''
-    On request, handles request from api, 
+    On request, handles request from api,
     returns movies and is appended to movie_results
     '''
     try:
