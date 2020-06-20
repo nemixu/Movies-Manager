@@ -97,6 +97,10 @@ body {
 
 }
 
+.movie-card{
+    padding-bottom: 35px;
+}
+
 .movie-year{
     font-size: 1rem;
 }
@@ -108,6 +112,11 @@ body {
 .movie-director{
     font-size: 1rem;
     font-style: italic;
+}
+
+#wrapper-recents {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 /*-- Movie Card styling--*/
@@ -377,3 +386,57 @@ body {
 
 
 /* Profile Styling */ 
+
+#profile-container{
+    padding-top:100px;
+}
+
+.remove-button{
+    color: #ffffff;
+    background-color: #B3001B;
+    width:30%;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    inline-size: min-content;
+}
+
+.remove-button:hover{
+    color: #ffffff;
+    background-color: #861526;
+    width:30%;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    animation: slowfade 2s ease-in;
+    inline-size: min-content;
+}
+
+#edit{
+    color: #ffffff;
+    background-color: #262626;
+    width:30%;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    inline-size: min-content;
+}
+
+#edit:hover{
+    color: #ffffff;
+    background-color: #6e6e6e;
+    width:30%;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    animation: slowfade 2s ease-in;
+    inline-size: min-content;
+}
