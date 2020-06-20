@@ -160,6 +160,7 @@ Example
 
 ## Features to implement in future deployments:
 
+* Reset password functionality
 * Implement additional search functionality from the API, the search function returns 10 searches by default. 
 * Search movie with additional fields such as IMDB ID or year of movie etc.
 * Add pagination to the search page to ensure additional movies are shown
@@ -190,14 +191,30 @@ Example
 
 ## Testing:
 
-This section will be updated with testing done on this project.
+Testing was done throughout the application build process and when build was finalized. The application was tested on Google Chrome, Firefox.
+Most of the testing was done for mobile devices via the dev tools on Google Chrome. Varying from Android devices to Iphone devices.
+This application was also tested on multiple hand held devices, One Plus 5t, Samsung S8, Iphone X pro.
 
-#### Testing Planning:
-This section will have the plans for testing this application
+Testing the response being sent to the DB was done through google chrome dev tools, using the NETWORK tap and recording the requests being made to see if data is actually being posted.
+Also a plugin for Vscode <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb">Azure Databases</a>, helped me go through my collections and see what was being passed to my collections and if data was being edited or removed instead of loading the atlas website, It saved time in the development process.
 
 #### Defensive Testing:
 
-This section will be updated with testing done on this project.
+Constant checks to see if user is in session
+Result = all features are not accessible unless in session
+
+Adding a favourite when you are not logged in.
+
+Result = Returned back to the home template and notified you must be logged in.
+
+Editing a favourite when not logged in.
+
+Result = Unable to do so as you are redirected if you attempt to go to a profile URL without being in session.
+
+Create multiple accounts with the same username.
+
+Result = Unable to do so as the db is checked if the username is already taken.
+
 
 #### Testing Stories:
 *
