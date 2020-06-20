@@ -8,9 +8,8 @@ This Project is for educational purposes only and is used to demonstrate the tec
 
 * [UX](#UX) 
     * [Project Goals](#Project-Goals) 
-    * Target Audience
-    * User Requirements and Expectations
-    * Design Choices
+    * [User Requirements and Expectations](#User-Requirements-and-Expectations)
+    * [Design Choices](#Design-Choices)
         * [Fonts](#Fonts) 
         * [Icons](#Icons) 
         * [Colours](#Colours) 
