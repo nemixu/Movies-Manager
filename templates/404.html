@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- 404 page to explain to user when something goes wrong.-->
+<div class="error-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2>Ooooops... something broke</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <p class="error-text">
+                    Seems like you are off the beaten track! head back by navigating to one of the navigation items or click
+                    <a class="nav-link" href="{{url_for('home')}}">Here!</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
