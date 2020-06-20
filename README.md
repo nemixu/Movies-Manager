@@ -72,21 +72,23 @@ This application contains the key CRUD requirement functionality and utilises a 
 
 The website will use light and neutral colours to have a warm an inviting theme for a user for a friendly vibe to ensure the user would return again. Also it should reflect to help the user digest the information on the site easily.
 
-#### Fonts:
+#### Fonts: 
 
-The font chosen for this project was Source Sans Pro as it was a sleek and clean font that made the information on the page pop and easy to read for the user.
+The font chosen for this project was <a href="https://fonts.google.com/specimen/Source+Sans+Pro">Source Sans Pro</a> as it was a sleek and clean font that made the information on the page pop and easy to read for the user.
 
 
 #### Icons:
 
-Icons used for this website were sourced from font-awesome as it was easy to locate and preview the icons needed for best user experience for those interacting with the site.
+Icons used for this website were sourced from <a href="https://fontawesome.com/">Font Awesome</a> as it was easy to locate and preview the icons needed for best user experience for those interacting with the site.
 
 
 #### Colours:
 
-*
-*
-*
+* ![#f4f4f4] - Background Colour
+* ![#b3001b] - Button, Nav, Divider Colour
+* ![#262626] - 
+* ![#255c99] -
+* ![#329f5B] -
 
 #### Styling: 
 
