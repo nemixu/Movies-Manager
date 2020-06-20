@@ -58,11 +58,6 @@ body {
     color: #861526 !important;
 }
 
-.navbar-light .navbar-toggler-icon {
-    background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e);
-}
-
-
 .main-content {
     min-height: calc(100vh - 74px - 90px);
 }
@@ -70,9 +65,6 @@ body {
 
 #landing-image {
     background: url("https://images.unsplash.com/photo-1568876694728-451bbf694b83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80") no-repeat center 100%;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
     top: 0;
     right: 0;
@@ -97,6 +89,14 @@ body {
 
 }
 
+.fa-imdb {
+    font-size: 1.3rem;
+    color: #B3001B;
+    background: border-box;
+}
+
+
+
 .movie-card{
     padding-bottom: 35px;
 }
@@ -107,6 +107,7 @@ body {
 
 .movie-title {
     font-size: 1.4rem;
+    display: inline-block;
 }
 
 .movie-director{
@@ -202,28 +203,23 @@ body {
 #login-button {
     color: #ffffff;
     background-color: #B3001B;
-    width:30%;
     text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     margin: 25px 0px;
-    inline-size: min-content;
+    
 }
 
 #login-button:hover {
     color: #ffffff;
     background-color: #861526;
-    width:30%;
     text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     margin: 25px 0px;
     animation: slowfade 2s ease-in;
-    inline-size: min-content;
 }
 
 .anchorHover {
@@ -240,28 +236,24 @@ body {
 #register-button {
     color: #ffffff;
     background-color: #B3001B;
-    width:30%;
     text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     margin: 25px 0px;
-    inline-size: min-content;
+    
 }
 
 #register-button:hover {
     color: #ffffff;
     background-color: #861526;
-    width:30%;
     text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     margin: 25px 0px;
     animation: slowfade 2s ease-in;
-    inline-size: min-content;
+    
 }
 
 /*-- Footer Styling --*/
@@ -316,52 +308,36 @@ body {
 #search-button{
     color: #ffffff;
     background-color: #B3001B;
-    width:30%;
-    text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
-    inline-size: min-content;
 }
 
 #search-button:hover{
     color: #ffffff;
     background-color: #861526;
-    width:30%;
-    text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     animation: slowfade 2s ease-in;
-    inline-size: min-content;
 }
 
 #add-favorites {
     color: #ffffff;
     background-color: #B3001B;
-    width:30%;
-    text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
-    inline-size: min-content;
     margin-bottom: 100px;
 }
 
 #add-favorites:hover{
     color: #ffffff;
     background-color: #861526;
-    width:30%;
-    text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     animation: slowfade 2s ease-in;
-    inline-size: min-content;
 }
 
 .hidden-text {
@@ -392,53 +368,43 @@ body {
 }
 
 .remove-button{
+    width: 5.5rem;
     color: #ffffff;
     background-color: #B3001B;
-    width:30%;
     text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
-    inline-size: min-content;
 }
 
 .remove-button:hover{
+    width: 5.5rem;
     color: #ffffff;
     background-color: #861526;
-    width:30%;
-    text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     animation: slowfade 2s ease-in;
-    inline-size: min-content;
 }
 
 #edit{
+    width: 5.5rem;
     color: #ffffff;
     background-color: #262626;
-    width:30%;
-    text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
-    inline-size: min-content;
+    
 }
 
 #edit:hover{
+    width: 5.5rem;
     color: #ffffff;
     background-color: #6e6e6e;
-    width:30%;
-    text-decoration: none;
     border: none;
-    display: inline-block;
-    border-radius: 5px;
+    border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     animation: slowfade 2s ease-in;
-    inline-size: min-content;
 }
 
 
