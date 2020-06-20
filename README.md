@@ -11,16 +11,14 @@ This Project is for educational purposes only and is used to demonstrate the tec
     * Target Audience
     * User Requirements and Expectations
     * Design Choices
-        * Fonts
-        * Icons
-        * Colours 
-        * Styling 
-        * Images
-        * Backgrounds
+        * [Fonts](#Fonts) 
+        * [Icons](#Icons) 
+        * [Colours](#Colours) 
+        * [Styling](#Styling) 
 * [Wire Frames](#Wireframes)
 * [Features](#Features)
-    * [Features to be implemented](#Features-that-will-be-implimented-in-future-deployments)
-* [Technology Used](#Technology-Used)
+    * [Features to be implemented](#Features-to-implement-in-future-deployments)
+* [Technology Used](#Technologies-Used)
 * [Testing](#Testing)
 * [Bugs](#Bugs-During-Development)
 * [Deployment](#Deployment)
@@ -214,16 +212,34 @@ Result = Unable to do so as the db is checked if the username is already taken.
 
 
 #### Testing Stories:
-*
-*
-*
-*
+
+* Created a user profile, was promted with a profile screen that was blank
+- fixed by re-directing to home page for better UX
+* Click on search function, search place holder stays, considered bad ux
+- fixed by adding styling to the input focus and making it transparent.
+* User searches for a movie but types 2 letters, no result is found
+- fixed by allowing a minimum of 4 characters be typed before searching
+* User adds a movie to favourites
+- User checks favourite, favourite is present in users favourites
+* User Updates Favourite
+- Results in users favourite being updated with the requested fields
+* User removes a favourite from user favourites
+- User is notified favorite is removed
+* User logged out of session
+- User attempted to search and add a favourite whilst being logged out, asked to log in.
+* User logged in attempted to register an account with the same username
+- User was notified an account is already using this username.
+
 
 ### Testing Outcome:
 
-Testing this application was carried out manually
+Testing this application was carried out manually by users on mobile devices and desktop devices.
+bugs that were found during development have been rectified and anything that was not fixed is now stated in the Known bugs section.
+The overal outcome of this testing has shown that the application has the basic defence abilities in place.
+The application does work well with mobile tablet and desktop devices.
 
-
+This application was developed for the use on most mobile devices and Google Chrome.
+Very little effort was put into making this cross compatible with every outdated browser.
 
 #### Bugs During Development:
 
@@ -346,15 +362,17 @@ SECRET\_KEY|"your\_secret\_key"
 * 8: The site has been deployed to Heroku.
 
 
-
-
 ## Closing Notes:
 
-Any additional notes to go here
+This application was created to demonstrate use of CRUD functionality.
+The application is not expected to be used by a large scale client base.
+
 
 ## Credits: 
+* Philip Kearney - advice and feedback on mongodb relationships, user testing
+* Reggie Morgan - User testing and feedback
+* Miroslav Svec - for the solution on user logins and auth via hashing passwords, this was used and highly modified to suit project needs.
+* Simen Daehlin - For suggesting project ideas, reviewing project and also providing readme examples"
 
-Miroslav Svec - for the solution on user logins and auth via hashing passwords, this was used and highly modified to suit project needs.
-Simen Daehlin - For suggesting project ideas, reviewing project and also providing readme examples"
 * <a href="http://www.omdbapi.com/">Movie API used</a>
 * <a href="https://unsplash.com/">Stock Images used</a>
