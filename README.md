@@ -242,13 +242,11 @@ Very little effort was put into making this cross compatible with every outdated
 
 #### Bugs During Development:
 
-To be regularly updated:
-
 Had issues with login button on the login page, where the placeholder text on the button was off centrered on small screens, this was resolved with inline-size: min-content, this was tested through chrome dev tools and adjusting element styles to suit.
 
 Had issues with landing image on the home page, I set the background image to absolute, any new items added for e.g (new container, row, cols) would position offset due to the absolute, removing this then resorted in the natural flow of the html items.
 
-Issues with the search data that was displayhed from div's and h3's it would not post to DB correctly, added hidden text areas and it sent correctly, next issue was because each div was part of a for loop it would only post the first div field input even if we clicked the last input.
+Issues with the search data that was displayed from div's and h3's it would not post to DB correctly, added hidden text areas and it sent correctly, next issue was because each div was part of a for loop it would only post the first div field input even if we clicked the last input.
 
 For loop on favourites page where I was using the incorrect variable name and it was not pulling the correct information.
 
