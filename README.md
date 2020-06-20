@@ -71,6 +71,7 @@ This application contains the key CRUD requirement functionality and utilises a 
 ## Design Choices:
 
 The website will use light and neutral colours to have a warm an inviting theme for a user for a friendly vibe to ensure the user would return again. Also it should reflect to help the user digest the information on the site easily.
+During the design of this application consideration was taken into account for the User Experience, minimum number of clicks for the user to ensure good User Experience, to achieve this I decided to have as little interaction with multiple elemenets as possible without removing from the overal application goal of CRUD functionality.
 
 #### Fonts: 
 
@@ -84,7 +85,7 @@ Icons used for this website were sourced from <a href="https://fontawesome.com/"
 
 #### Colours:
 
-* ![#f4f4f4] - Background Colour
+* ![#f4f4f4] - Background Colour for Navbar and Footer
 * ![#b3001b] - Button, Nav, Divider Colour
 * ![#262626] - 
 * ![#255c99] -
@@ -92,19 +93,22 @@ Icons used for this website were sourced from <a href="https://fontawesome.com/"
 
 #### Styling: 
 
-*
-*
-*
+* Nav bar was given an off white colour and vibrant text colours to make it pop, also a box shadow to give an appearance the navbar is floating. 
+* Use of dividers used to show sepration but also use the same colour theme throughout the application.
+* Webkit-mask-image used on Movie Images to almost feel like a gradient into the below details of the movie.
+* Edit and remove buttons styled according to all other buttons to esnure the same flow throughout the application
 
 #### Wireframes:
 
-Wireframes for this projected were created using Balsamiq mockups.
+Wireframes for this application were created using Balsamiq mockups.
 Each wireframe was created using mobile first and each sketchup was done prior to the building of the site to ensure fast workflow.
 Having done this provided me with drawings to work with whilst in the production phase and ensured I followed the exact steps and in return cut my production time in half.
+Although after testing an implimenting some slight tweaks were made, ever so slightly such as removing nav icons if a user is not logged in for e.g.
+
 
 #### Database planning:
 
-As this was the first time working with databases and schemas I was unsure how to handle or tackle a project like this. My original plan for the database was to have a collection of Users: inside this document I would have username , email, password(hashed), and a unique id. After this I had a Favourites collection:  that had a list of favouirtes added by the user, which held title, year, poster, and imdbid code. After using this schema I found it to be problematic that If I added a user they would see all favouirtes as I did not declare a relationship between them.
+As this was the first time working with databases and schemas I was unsure how to handle or tackle an application like this. My original plan for the database was to have a collection of Users: inside this document I would have username , email, password(hashed), and a unique id. After this I had a Favourites collection:  that had a list of favouirtes added by the user, which held title, year, poster, and imdbid code. After using this schema I found it to be problematic that If I added a user they would see all favouirtes as I did not declare a relationship between them.
 I made a change to the schema and then added an array inside of the Users document that would show the users favourites only which was fine and worked well for the purpose.
 An issue I then had was the relationship was still not valid as it was possible to duplicate the same movie favourite over and over instead of just calling the data already if it was once added to the database.
 
@@ -144,19 +148,24 @@ Example
 
 ```
 
-#### Background:
-
-*
-*
-*
-
 ## Features:
 
-* 
-*
-*
-*
-*
+* Register User / verify if user is already created
+* Login User / verifying if user is authenticated and part of db
+* Search Movies / search a movie by its name
+* Edit Movie / by its Name or Date
+* Delete Movie / Remove Movie from list
+* Logout User / Clear session cookie
+
+
+## Features to implement in future deployments:
+
+* Implement additional search functionality from the API, the search function returns 10 searches by default. 
+* Search movie with additional fields such as IMDB ID or year of movie etc.
+* Add pagination to the search page to ensure additional movies are shown
+* When you click on an image of the movie It will give additional info such as movie description.
+* Handle if an email address is already in use
+* Add a watched list in addition to favourites
 
 ## Technologies Used:
 
