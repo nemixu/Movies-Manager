@@ -16,7 +16,7 @@
             </div>
             <form method="post" autocomplete="off" action="search" id="search-form-home" >
                 <div class="form-group">
-                  <label aria-labelledby="search-form-home">Search a movie title</label>
+                  <label for="search-term" aria-labelledby="search-term">Search a movie title</label>
                   <input type="text" class="form-control text-center" placeholder="search here!" id="search-term" minlength="4" name="search-term" required>
                 </div>
                 <button class="btn btn-primary" id="search-button">Search</button>
@@ -40,7 +40,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
                 <img src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg" class="rounded float-left movie-img" alt="Movie Image">
-                <a target="_blank" rel="noopener" href="https://www.imdb.com/title/tt5519340/"><i class="fa fa-imdb"></i></a>
+                <a aria-label="imdb-link" target="_blank" rel="noopener" href="https://www.imdb.com/title/tt5519340/"><i class="fa fa-imdb"></i></a>
                 <h3 class="movie-title">
                     Bright  
                 </h3>
@@ -56,7 +56,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
                 <img src="https://m.media-amazon.com/images/M/MV5BZjFhM2I4ZDYtZWMwNC00NTYzLWE3MDgtNjgxYmM3ZWMxYmVmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,631,1000_AL_.jpg" class="rounded float-left movie-img" alt="Movie Image">
-                <a target="_blank" rel="noopener" href="https://www.imdb.com/title/tt1051906/"><i class="fa fa-imdb"></i></a>
+                <a aria-label="imdb-link" target="_blank" rel="noopener" href="https://www.imdb.com/title/tt1051906/"><i class="fa fa-imdb"></i></a>
                 <h3 class="movie-title">
                     The Invisible Man
                 </h3>
@@ -72,7 +72,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
                 <img src="https://m.media-amazon.com/images/M/MV5BNmMwYzFlNTEtYTc0NC00NGY4LTgzNzItZGFiYTViY2QzNzU1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,674,1000_AL_.jpg" class="rounded float-left movie-img" alt="Movie Image">
-                <a target="_blank" rel="noopener" href="https://www.imdb.com/title/tt6723592/"><i class="fa fa-imdb"></i></a>
+                <a aria-label="imdb-link" target="_blank" rel="noopener" href="https://www.imdb.com/title/tt6723592/"><i class="fa fa-imdb"></i></a>
                 <h3 class="movie-title">
                     Tenet
                 </h3>
@@ -88,7 +88,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
                 <img src="https://i.ibb.co/FDGqCmM/papers-co-ag74-interstellar-wide-space-film-movie-art-33-iphone6-wallpaper.jpg" class="rounded float-left movie-img" alt="Movie Image">
-                <a target="_blank" rel="noopener" href="https://www.imdb.com/title/tt0816692/"><i class="fa fa-imdb"></i></a>
+                <a aria-label="imdb-link" target="_blank" rel="noopener" href="https://www.imdb.com/title/tt0816692/"><i class="fa fa-imdb"></i></a>
                 <h3 class="movie-title">
                     Interstellar
                 </h3>
@@ -126,12 +126,12 @@
             {% for movie in recents %}       
             <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
                 <img src="{{ movie.poster }}" class="rounded float-left movie-img" alt="Movie Image">
-                <textarea name="title" id="title" class="hidden-text">{{ movie.title }}</textarea>
-                <textarea name="year" id="year" class="hidden-text">{{ movie.year }}</textarea>
-                <textarea name="imdbid" id="imdbid" class="hidden-text">{{ movie.imdbid }}</textarea>
-                <textarea name="poster" id="poster" class="hidden-text">{{ movie.poster }}</textarea>
+                <textarea name="title" class="hidden-text">{{ movie.title }}</textarea>
+                <textarea name="year" class="hidden-text">{{ movie.year }}</textarea>
+                <textarea name="imdbid" class="hidden-text">{{ movie.imdbid }}</textarea>
+                <textarea name="poster" class="hidden-text">{{ movie.poster }}</textarea>
                 <h3 class="movie-title">
-                    <a target="_blank" rel="noopener" href="https://www.imdb.com/title/{{ movie.imdbid }}/"><i class="fa fa-imdb"></i></a>
+                    <a aria-label="imdb-link" target="_blank" rel="noopener" href="https://www.imdb.com/title/{{ movie.imdbid }}/"><i class="fa fa-imdb"></i></a>
                         {{ movie.title }} 
                     </h3>
                     <h4 class="movie-year">
