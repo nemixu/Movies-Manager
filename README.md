@@ -241,9 +241,9 @@ This application was developed on Visual Studio Code, using git and GitHub to ho
 ### Cloing the application from GitHub:
 
 <strong>Ensure</strong> you have the following installed:
-* PIP
-* Python 3
-* Git
+* <a href="https://pypi.org/project/pip/">PIP</a>
+* <a href="https://www.python.org/downloads/">Python 3</a>
+* <a href="https://git-scm.com/downloads">Git</a>
 
 <strong>Make sure you have an account at <a href="https://www.mongodb.com/">MongoDB</a> in order to construct the database.</strong>
 
@@ -293,7 +293,7 @@ flask run
 ```
 or 
 ```bash
-Python3 app.py
+python app.py
 ```
 
 ### Deploying Movies-Manager to Heroku:
@@ -322,7 +322,7 @@ PORT|5000
 MONGO\_URI|mongodb+srv://<username>:<password>@<cluster\_name>-qtxun.mongodb.net/<database\_name>?retryWrites=true&w=majority
 SECRET\_KEY|"your\_secret\_key"
 * 7: Click the deploy button on the Heroku dashboard.
-* 8: The site has been deployed the Heroku.
+* 8: The site has been deployed to Heroku.
 
 
 
