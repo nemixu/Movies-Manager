@@ -198,18 +198,6 @@ def add_favorite():
         return render_template('login.html')
 
 
-@APP.route('/favourites')
-def favorites():
-    '''
-    Get all the users favourites from the user that is logged in,
-    get all the favourites where the _id is in the array of the users favourite ids
-    '''
-    user_favs_ids = users_collection.find_one({"_id": ObjectId(session['user'])}, {"favourites": 1})
-     # Get all the favourites where the _id is in the array of the users favourite ids
-    user_favs = favourites_collection.find({"_id": {"$in": user_favs_ids["favourites"]}})
-    return render_template('favourites.html', user={"favourites": user_favs})
-
-
 @APP.route('/delete_favorites/<favorites_id>')
 def delete_favorites(favorites_id):
     '''
