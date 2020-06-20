@@ -9,18 +9,21 @@
       <div class="col-sm-12 col-md-6 col-lg-3 movie-card">
         <form action="{{ url_for('edit') }}" method="POST">
         <img src="{{ movie.poster }}" class="rounded float-left movie-img" alt="Movie Image">
-        <input name="title" id="title" class="form-control" value="{{ movie.title }}"/>
-        <input name="year" id="year" class="form-control" value="{{ movie.year }}"/>
-        <input name="_id" id="_id" type="hidden" value="{{ movie._id }}" class="hidden-text"/>
+        <label class="label" for="title" aria-label="movietitle"></label>
+        <input name="title" class="form-control" aria-label="movietitle" value="{{ movie.title }}"/>
+        <label class="label" for="year" aria-label="movieyear"></label>
+        <input name="year" class="form-control" aria-label="movieyear" value="{{ movie.year }}"/>
+        <label class="label" for="user_id" aria-label="user_id"></label>
+        <input name="user_id" type="hidden"aria-label="movieid" value="{{ movie._id }}" class="hidden-text"/>
         <h3 class="movie-title">
-          <a target="_blank" rel="noopener" href="https://www.imdb.com/title/{{ movie.imdbid }}/">
+          <a aria-label="imdb-link" target="_blank" rel="noopener" href="https://www.imdb.com/title/{{ movie.imdbid }}/">
             <i class="fa fa-imdb"></i></a>
           {{ movie.title }}
         </h3>
         <h4 class="movie-year">
           {{ movie.year }}
         </h4>
-        <a href="/delete_favorites/{{movie._id}}" class="btn btn-dark remove-button">Remove</a>
+        <a href="/delete_favorites/{{movie._id}}" aria-label="delete-fav" class="btn btn-dark remove-button">Remove</a>
         <input type="submit" id="edit" class="btn btn-dark" value="Edit"/>
       </form>
       </div>
