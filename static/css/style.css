@@ -20,15 +20,6 @@ body {
     border-top: 1px solid #B3001B;
 }
 
-.verticle-divider {
-    max-width: 5.6rem;
-    border-width: .2rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border: none;
-    border-top: 1px solid #B3001B;
-
-}
 /*-- Navigation Styling --*/
 
 .navbar {
