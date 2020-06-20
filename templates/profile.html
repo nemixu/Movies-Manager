@@ -20,8 +20,8 @@
         <h4 class="movie-year">
           {{ movie.year }}
         </h4>
-        <a href="/delete_favorites/{{movie._id}}" class="btn btn-dark">Remove</a>
-        <input type="submit" id="edit" class="input" value="Edit"/>
+        <a href="/delete_favorites/{{movie._id}}" class="btn btn-dark remove-button">Remove</a>
+        <input type="submit" id="edit" class="btn btn-dark" value="Edit"/>
       </form>
       </div>
     {% endfor %}
