@@ -256,6 +256,8 @@ Search function bug, that if you do not pass in specific details in search you g
 Known bug, from the API it does not have images / posters for every movie. This is something I found out testing.
 API only handles specific searches, if search is not broad enough it will return false or Too many results, to handle this in the most basic way to ensure user has a good experience I have ensured the min character length is 4.
 
+When running the code through css validator, there are no errors. However to be noted there are warnings (15) due to proprietary code the validator only validates against valid code. And the Vendor extensions are proprietary code. (Just to be noted)
+
 ## Deployment:
 
 This application was developed on Visual Studio Code, using git and GitHub to host the repository.
