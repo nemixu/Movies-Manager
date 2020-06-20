@@ -8,6 +8,10 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+input:focus::placeholder {
+    color: transparent;
+  }
+
 .label {
     display: none;
     margin:0;
@@ -101,6 +105,7 @@ body {
 
 .movie-title {
     font-size: 1.4rem;
+    padding-top: 10px;
     display: inline-block;
 }
 
@@ -293,6 +298,8 @@ body {
 
 }
 
+
+
 #search-form-home {
     padding: 0;
     color: #ffffff;
@@ -322,6 +329,7 @@ body {
     border-radius: 45px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     margin-bottom: 100px;
+    margin-left: 25px;
 }
 
 #add-favorites:hover{
@@ -418,4 +426,12 @@ body {
     padding-bottom:4rem;
 }
 
+}
+
+
+@media screen and (min-width: 959px) {
+
+#add-favorites {
+   margin-left: 0px;
+}
 }
