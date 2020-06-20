@@ -440,3 +440,12 @@ body {
     animation: slowfade 2s ease-in;
     inline-size: min-content;
 }
+
+
+.error-wrapper {
+    margin-top: 10rem;
+}
+
+.error-text{
+    font-weight: ;
+}
