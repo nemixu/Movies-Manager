@@ -30,23 +30,26 @@ This Project is for educational purposes only and is used to demonstrate the tec
 
 ## UX (User Experience)
 ### Project Goals
-The goal of this project is to create a web application that a user can interact with and search for their favorite movies. The users who access the website will be able to create a favorites list from movies they search.
+The goal of this project is to create a web application that a user can interact with and search for their favorite movies. The users who access the website will be able to create a favorites list from movies they search delete a favourite they have added, and update the title and year of the movie.
+This application contains the key CRUD requirement functionality and utilises a data handling document based database, MongoDB.
 
 #### User Goals:
 
-* To search movies I like and add ratings
+* To search movies I like, add to a favourites list
 * Create an account where I can build up a favorites list to keep track of movies I like
 * Visit a visually eppealing website
 * Be able to consume information on my mobile device, desktop or tablet without any issues.
+* Delete a movie from a list
+* Edit a movie
 
 #### User Stories:
 
-* As a user I wish to create an account on the site
+* As a user I wish to create an account on the application
 * As a user I wish to be able to search movies by name
-* As a user I wish to be able to add a rating to a movie searched
 * As a user I wish to add movies to a favorites list
 * As a user I wish to be able to remove items from the above list whenever I want
 * As a user I wish to be able to use this site on any device
+* As a user I wish to edit a movie in my favourites
 
 
 ## User Requirements and Expectations:
