@@ -243,6 +243,17 @@ def edit():
     return redirect(url_for('profile', user=session['user']))
 
 
+@APP.errorhandler(404)
+def response_404(exception):
+    """When 404 is captured display custom 404.html page"""
+    return render_template('404.html', exception=exception)
+
+
+@APP.errorhandler(500)
+def response_500(exception):
+    """When 500 is captured display custom 500.html page"""
+    return render_template('500.html', exception=exception)
+
 
 if __name__ == '__main__':
     APP.run(host=os.environ.get('IP'),
