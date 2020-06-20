@@ -31,7 +31,7 @@ def home():
     return render_template("home.html", recents=favourites_collection.find())
 
 
-# Register an account
+
 @APP.route('/register', methods=['GET', 'POST'])
 def register():
     '''
@@ -74,26 +74,23 @@ def register():
             return redirect(url_for('register'))
     return render_template('register.html')
 
-# User profile
+
 @APP.route('/profile/<user>')
 def profile(user):
     '''
     find user profile and return logged in profile and return favourites
+    pass user id to URL
     '''
     if 'user' in session:
-        find_user = users_collection.find_one({"_id": ObjectId(session["user"])}, {"_id": 1})
-        user_session = find_user['_id']
         user_favs_ids = users_collection.find_one({"_id": ObjectId(session['user'])},
                                                   {"favourites": 1})
         user_favs = favourites_collection.find({"_id": {"$in": user_favs_ids["favourites"]}})
-        user_account = users_collection.find_one({"_id": ObjectId(session['user'])},
-                                                 {"username": 1})
-        return render_template('profile.html',
-                               user=user_session, user_favs=user_favs, user_account=user_account)
+        user = users_collection.find_one({"_id": ObjectId(session['user'])}, {"username": 1})
+        return render_template('profile.html', user_favs=user_favs, user_account=user)
     flash("You must be logged in!")
     return redirect(url_for('home'))
 
-# Login route
+
 @APP.route('/login', methods=['GET'])
 def login():
     '''
@@ -107,7 +104,7 @@ def login():
     else:
         return render_template('login.html')
 
-# Authenticate User form request
+
 @APP.route('/auth', methods=['POST'])
 def auth():
     '''
@@ -178,18 +175,22 @@ def add_favorite():
     '''
     if 'user' in session:
         # Get all the oid from favourites using the imdbid
-        existing_fav_id = list(favourites_collection.find({"imdbid": request.form.to_dict()["imdbid"]}, {"_id": 1}))
+        existing_fav_id = list(favourites_collection.find
+                               ({"imdbid": request.form.to_dict()["imdbid"]}, {"_id": 1}))
         fav_id_arr = []
         for fav in existing_fav_id:
             fav_id_arr.append(fav["_id"])
         # Compare the oids to the list of user favourite ids.
-        user_fav_id = users_collection.count_documents({"_id": ObjectId(session["user"]), "favourites": {"$in": fav_id_arr}})
+        user_fav_id = users_collection.count_documents({"_id": ObjectId(session["user"]),
+                                                        "favourites": {"$in": fav_id_arr}})
         if user_fav_id > 0:
             flash('Movie already added to your favourites!')
         else:
-            # Save favourite to DB and store object ID into favourites of the currently logged in user
+            # Save favourite to DB and store object ID
+            # into favourites of the currently logged in user
             new_fav_id = favourites_collection.insert_one(request.form.to_dict()).inserted_id
-            users_collection.update_one({'_id': ObjectId(session['user'])}, {'$push': {'favourites': ObjectId(new_fav_id)}})
+            users_collection.update_one({'_id': ObjectId(session['user'])},
+                                        {'$push': {'favourites': ObjectId(new_fav_id)}})
             flash('Movie added to your favourites!')
         return redirect(url_for('search'))
     else:
@@ -224,6 +225,7 @@ def delete_favorites(favorites_id):
     else:
         flash('You must be logged in to remove this item')
     return redirect(url_for('favorites'))
+
 
 @APP.route('/edit', methods=['POST'])
 def edit():
