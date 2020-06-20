@@ -93,8 +93,6 @@ input:focus::placeholder {
     background: border-box;
 }
 
-
-
 .movie-card{
     padding-bottom: 35px;
 }
@@ -136,7 +134,7 @@ input:focus::placeholder {
 			color-stop(0.50,  rgba(0,0,0,1)),
 			color-stop(0.65,  rgba(0,0,0,1)),
 			color-stop(0.85,  rgba(0,0,0,0.6)),
-            color-stop(1.00,  rgba(0,0,0,0)));
+            color-stop(1.00,  rgba(0,0,0,0))); 
 }
 
 .toppick-wrapper{
@@ -298,8 +296,6 @@ input:focus::placeholder {
 
 }
 
-
-
 #search-form-home {
     padding: 0;
     color: #ffffff;
@@ -427,7 +423,6 @@ input:focus::placeholder {
 }
 
 }
-
 
 @media screen and (min-width: 959px) {
 
