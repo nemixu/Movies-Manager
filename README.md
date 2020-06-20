@@ -357,6 +357,7 @@ MONGO\_URI|mongodb+srv://<username>:<password>@<cluster\_name>-qtxun.mongodb.net
 SECRET\_KEY|"your\_secret\_key"
 * 7: Click the deploy button on the Heroku dashboard.
 * 8: The site has been deployed to Heroku.
+* 9: <a href="https://movie-manager-flask.herokuapp.com/">Here is a link to the Deployed website</a> 
 
 
 ## Closing Notes:
