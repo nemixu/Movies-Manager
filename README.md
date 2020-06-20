@@ -85,11 +85,10 @@ Icons used for this website were sourced from <a href="https://fontawesome.com/"
 
 #### Colours:
 
-* ![#f4f4f4] - Background Colour for Navbar and Footer
-* ![#b3001b] - Button, Nav, Divider Colour
-* ![#262626] - 
-* ![#255c99] -
-* ![#329f5B] -
+* `#f4f4f4` - Background Colour for Navbar and Footer
+* `#b3001b` - Button, Nav, Divider Colour
+* `#e7e7e7` - Form container colour
+* `#BBBBBB` - Footer colour for login/register form
 
 #### Styling: 
 
