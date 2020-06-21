@@ -151,14 +151,17 @@ def search():
     '''
     if request.method == 'POST':
         search_term = request.form['search-term']
-        apikey = "3c0dea9f"
-        api = requests.get(
-            "http://www.omdbapi.com/?apikey={}&s={}".format(apikey, search_term))
+        api_key = "3c0dea9f"
+        api = requests.get("http://www.omdbapi.com/?apiKey={}&s={}&page=1".format(api_key, search_term))
         data = api.json()
         movie_results = list()
-        for movies in data['Search']:
-            movie_results.append([movies['Title'], movies['Year'], movies['imdbID'], movies['Poster']])
-        return render_template('search.html', movie_results=movie_results)
+        if data['Response'] == 'False':
+            flash("No results found matching your search, be specific")
+            return render_template('search.html')
+        else:
+            for movies in data['Search']:
+                movie_results.append([movies['Title'], movies['Year'], movies['imdbID'], movies['Poster']])
+            return render_template('search.html', movie_results=movie_results)
     else:
         return render_template('search.html')
 
