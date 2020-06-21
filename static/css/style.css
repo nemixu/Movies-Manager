@@ -45,6 +45,10 @@ input:focus::placeholder {
     color: #B3001B !important;
 }
 
+.navbar-brand{
+    font-weight: 600 !important;
+}
+
 .nav-link:hover {
     color: #861526 !important;
 }
@@ -61,6 +65,11 @@ input:focus::placeholder {
     min-height: calc(100vh - 34px - 90px);
 }
 /*-- Home Page Styling --*/
+
+.form-group{
+    display: flex;
+    align-items: center;
+}
 
 #landing-image {
     background: url("https://images.unsplash.com/photo-1568876694728-451bbf694b83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80") no-repeat center 100%;
@@ -95,6 +104,7 @@ input:focus::placeholder {
 
 .movie-card{
     padding-bottom: 35px;
+    text-align: center;
 }
 
 .movie-year{
@@ -104,6 +114,8 @@ input:focus::placeholder {
 .movie-title {
     font-size: 1.4rem;
     padding-top: 10px;
+    width:100%;
+    height: 55px;
     display: inline-block;
 }
 
@@ -296,43 +308,80 @@ input:focus::placeholder {
 
 }
 
+#search-term{
+    
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
 #search-form-home {
     padding: 0;
     color: #ffffff;
 }
 
 #search-button{
+    font-weight: 600;
     color: #ffffff;
+    width:13rem;
     background-color: #B3001B;
     border: none;
-    border-radius: 45px;
+    border-radius: 5px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
 }
 
 #search-button:hover{
+    font-weight: 600;
     color: #ffffff;
+    width:13rem;
     background-color: #861526;
     border: none;
-    border-radius: 45px;
+    border-radius: 5px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     animation: slowfade 2s ease-in;
 }
 
-#add-favorites {
+#search-button-main{
+    font-weight: 600;
+    float: right;
     color: #ffffff;
     background-color: #B3001B;
     border: none;
-    border-radius: 45px;
+    border-radius: 5px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
-    margin-bottom: 100px;
-    margin-left: 25px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    height:38px;
 }
 
-#add-favorites:hover{
+#search-button-main:hover{
+    font-weight: 600;
     color: #ffffff;
     background-color: #861526;
     border: none;
-    border-radius: 45px;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    animation: slowfade 2s ease-in;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    height:38px;
+}
+
+#add-favorites {
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #B3001B;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+    margin-bottom: 100px;
+}
+
+#add-favorites:hover{
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #861526;
+    border: none;
+    border-radius: 5px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     animation: slowfade 2s ease-in;
 }
@@ -345,7 +394,7 @@ input:focus::placeholder {
 #alerts {
     position: absolute;
     display: none;
-    left: 0;
+    right: 0;
     margin-top:60px;
     z-index: 999;
     background-color: rgba(0, 0, 0, 0.5);
@@ -364,41 +413,45 @@ input:focus::placeholder {
 }
 
 .remove-button{
+    font-weight: 600;
     width: 5.5rem;
     color: #ffffff;
     background-color: #B3001B;
     text-decoration: none;
     border: none;
-    border-radius: 45px;
+    border-radius: 5px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
 }
 
 .remove-button:hover{
+    font-weight: 600;
     width: 5.5rem;
     color: #ffffff;
     background-color: #861526;
     border: none;
-    border-radius: 45px;
+    border-radius: 5px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     animation: slowfade 2s ease-in;
 }
 
 #edit{
+    font-weight: 600;
     width: 5.5rem;
     color: #ffffff;
     background-color: #262626;
     border: none;
-    border-radius: 45px;
+    border-radius: 5px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     
 }
 
 #edit:hover{
+    font-weight: 600;
     width: 5.5rem;
     color: #ffffff;
     background-color: #6e6e6e;
     border: none;
-    border-radius: 45px;
+    border-radius: 5px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
     animation: slowfade 2s ease-in;
 }
@@ -422,11 +475,24 @@ input:focus::placeholder {
     padding-bottom:4rem;
 }
 
+#search-button{
+    width:25rem;
+  }
+
+#search-button:hover{
+    width:25rem;
+
+}
+
 }
 
 @media screen and (min-width: 959px) {
 
 #add-favorites {
    margin-left: 0px;
+}
+
+.movie-title {
+    height: 80px;;
 }
 }
